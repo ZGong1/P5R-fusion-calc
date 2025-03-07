@@ -1,0 +1,50 @@
+// 100% accurate, manually double checked
+// Personas in the compendium of the ren.dec file
+
+Agathion: 0083
+Ame-no-Uzume: 0059
+Angel: 004C
+Apsaras: 0065
+Arsene: 00C9
+Berith: 008F
+Bicorn: 007F
+Black Ooze: 007E
+Cait Sith: 01B4
+Eligor: 0009
+Flauros: 0042
+Genbu: 0113
+High Pixie: 001A
+Hua Po: 000B
+Incubus: 0027
+Inugami: 0051
+Ippon-Datara: 0043
+Jack Frost: 0005
+Jack-o'-Lantern: 0004
+Jikokuten: 0117
+Kelpie: 0062
+Kodama: 0082
+Koropokguru: 0068
+Leanan Sidhe: 003F
+Makami: 002B
+Mandrake: 0079
+Matador: 011D
+Mokoi: 0023
+Nekomata: 0049
+Nigi Mitama: 0097
+Nue: 0085
+Obariyon: 0038
+Oni: 0028
+Onmoraki: 0084
+Orobas: 0035
+Orpheus (F) Picaro: 0173
+Orthrus: 0044
+Pixie: 0006
+Raoul: 016B
+Regent: 006A
+Shiisaa: 003C
+Shiki-Ouji: 0033
+Silky: 007C
+Slime: 0054
+Succubus: 0045
+Suzaku: 0111
+Yaksini: 0014

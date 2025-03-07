@@ -1,0 +1,69 @@
+# output of python .\filterRanges.py .\output_unique_alladdr.txt output.txt
+
+# removes mentions of addresses outside of the ranges:
+ - 0x02xx-0x03xx
+ - 0x4xxx-0x5xxx
+ - 0x6xxx-0x9xxx
+
+# Registered personas that don't show up: 
+    0x0042 (special fusion)
+
+# Unregistered personas that do show up:
+    0x0030  Kali
+    0x0056  Yatagarasu
+    0x0a00  no valid persona found (can be filtered by not having a valid uid entry in the persona list)
+    0x0d10  no valid persona found (can be filtered by not having a valid uid entry in the persona list)
+    0x0f00  no valid persona found (can be filtered by not having a valid uid entry in the persona list)
+
+
+0x0004 found at addresses: 0x44D0
+0x0005 found at addresses: 0x4500
+0x0006 found at addresses: 0x4530
+0x0009 found at addresses: 0x45C0
+0x000b found at addresses: 0x4620
+0x0014 found at addresses: 0x47D0
+0x001a found at addresses: 0x48F0
+0x0023 found at addresses: 0x4AA0
+0x0027 found at addresses: 0x4B60
+0x0028 found at addresses: 0x4B90
+0x002b found at addresses: 0x4C20
+0x0030 found at addresses: 0x5677, 0x5B57 // kali but not actually in compendium
+0x0033 found at addresses: 0x4DA0
+0x0035 found at addresses: 0x4E00
+0x0038 found at addresses: 0x4E90
+0x003c found at addresses: 0x4F50
+0x003f found at addresses: 0x4FE0
+0x0043 found at addresses: 0x50A0
+0x0044 found at addresses: 0x50D0
+0x0045 found at addresses: 0x5100
+0x0049 found at addresses: 0x51C0
+0x004c found at addresses: 0x5250
+0x0051 found at addresses: 0x5340
+0x0054 found at addresses: 0x53D0
+0x0056 found at addresses: 0x69C4 // Yatagarasu but isn't in compendium
+0x0059 found at addresses: 0x54C0
+0x0062 found at addresses: 0x5670
+0x0065 found at addresses: 0x5700
+0x0068 found at addresses: 0x5790
+0x006a found at addresses: 0x57F0
+0x0079 found at addresses: 0x5AC0
+0x007c found at addresses: 0x5B50
+0x007e found at addresses: 0x5BB0
+0x007f found at addresses: 0x5BE0
+0x0082 found at addresses: 0x5C70
+0x0083 found at addresses: 0x5CA0
+0x0084 found at addresses: 0x5CD0
+0x0085 found at addresses: 0x5D00
+0x008f found at addresses: 0x5EE0
+0x0097 found at addresses: 0x6060
+0x00c9 found at addresses: 0x69C0
+0x0111 found at addresses: 0x7740
+0x0113 found at addresses: 0x77A0
+0x0117 found at addresses: 0x7860
+0x011d found at addresses: 0x7980
+0x016b found at addresses: 0x8820
+0x0173 found at addresses: 0x89A0
+0x01b4 found at addresses: 0x95D0
+0x0a00 found at addresses: 0x95D9 // not actually a valid uid
+0x0d10 found at addresses: 0x9B12 // not actually a valid uid
+0x0f00 found at addresses: 0x5089 // not actually a valid uid
