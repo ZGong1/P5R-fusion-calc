@@ -1,0 +1,677 @@
+[
+  {
+    "address": "0x000044d0",
+    "value": "0x0004",
+    "name": "Jack-o'-Lantern"
+  },
+  {
+    "address": "0x00004500",
+    "value": "0x0005",
+    "name": "Jack Frost"
+  },
+  {
+    "address": "0x00004530",
+    "value": "0x0006",
+    "name": "Pixie"
+  },
+  {
+    "address": "0x00004560",
+    "value": "0x0007",
+    "name": "Cerberus"
+  },
+  {
+    "address": "0x00004590",
+    "value": "0x0008",
+    "name": "Lilim"
+  },
+  {
+    "address": "0x000045c0",
+    "value": "0x0009",
+    "name": "Eligor"
+  },
+  {
+    "address": "0x00004620",
+    "value": "0x000b",
+    "name": "Hua Po"
+  },
+  {
+    "address": "0x00004650",
+    "value": "0x000c",
+    "name": "Decarabia"
+  },
+  {
+    "address": "0x00004680",
+    "value": "0x000d",
+    "name": "Mara"
+  },
+  {
+    "address": "0x000046e0",
+    "value": "0x000f",
+    "name": "Thor"
+  },
+  {
+    "address": "0x00004710",
+    "value": "0x0010",
+    "name": "Unicorn"
+  },
+  {
+    "address": "0x00004770",
+    "value": "0x0012",
+    "name": "Sarasvati"
+  },
+  {
+    "address": "0x000047a0",
+    "value": "0x0013",
+    "name": "Valkyrie"
+  },
+  {
+    "address": "0x000047d0",
+    "value": "0x0014",
+    "name": "Yaksini"
+  },
+  {
+    "address": "0x00004800",
+    "value": "0x0015",
+    "name": "Ganesha"
+  },
+  {
+    "address": "0x00004830",
+    "value": "0x0016",
+    "name": "Anubis"
+  },
+  {
+    "address": "0x00004860",
+    "value": "0x0017",
+    "name": "Mot"
+  },
+  {
+    "address": "0x000048f0",
+    "value": "0x001a",
+    "name": "High Pixie"
+  },
+  {
+    "address": "0x00004920",
+    "value": "0x001b",
+    "name": "Barong"
+  },
+  {
+    "address": "0x00004950",
+    "value": "0x001c",
+    "name": "Girimehkala"
+  },
+  {
+    "address": "0x00004980",
+    "value": "0x001d",
+    "name": "King Frost"
+  },
+  {
+    "address": "0x000049b0",
+    "value": "0x001e",
+    "name": "Narcissus"
+  },
+  {
+    "address": "0x000049e0",
+    "value": "0x001f",
+    "name": "Isis"
+  },
+  {
+    "address": "0x00004a10",
+    "value": "0x0020",
+    "name": "Lamia"
+  },
+  {
+    "address": "0x00004a40",
+    "value": "0x0021",
+    "name": "Legion"
+  },
+  {
+    "address": "0x00004a70",
+    "value": "0x0022",
+    "name": "Rakshasa"
+  },
+  {
+    "address": "0x00004aa0",
+    "value": "0x0023",
+    "name": "Mokoi"
+  },
+  {
+    "address": "0x00004b30",
+    "value": "0x0026",
+    "name": "Titania"
+  },
+  {
+    "address": "0x00004b60",
+    "value": "0x0027",
+    "name": "Incubus"
+  },
+  {
+    "address": "0x00004b90",
+    "value": "0x0028",
+    "name": "Oni"
+  },
+  {
+    "address": "0x00004bc0",
+    "value": "0x0029",
+    "name": "Lilith"
+  },
+  {
+    "address": "0x00004bf0",
+    "value": "0x002a",
+    "name": "Rangda"
+  },
+  {
+    "address": "0x00004c20",
+    "value": "0x002b",
+    "name": "Makami"
+  },
+  {
+    "address": "0x00004c50",
+    "value": "0x002c",
+    "name": "Parvati"
+  },
+  {
+    "address": "0x00004c80",
+    "value": "0x002d",
+    "name": "Gabriel"
+  },
+  {
+    "address": "0x00004d40",
+    "value": "0x0031",
+    "name": "Kurama Tengu"
+  },
+  {
+    "address": "0x00004da0",
+    "value": "0x0033",
+    "name": "Shiki-Ouji"
+  },
+  {
+    "address": "0x00004dd0",
+    "value": "0x0034",
+    "name": "Yamata-no-Orochi"
+  },
+  {
+    "address": "0x00004e00",
+    "value": "0x0035",
+    "name": "Orobas"
+  },
+  {
+    "address": "0x00004e90",
+    "value": "0x0038",
+    "name": "Obariyon"
+  },
+  {
+    "address": "0x00004ec0",
+    "value": "0x0039",
+    "name": "Queen Mab"
+  },
+  {
+    "address": "0x00004ef0",
+    "value": "0x003a",
+    "name": "Sandalphon"
+  },
+  {
+    "address": "0x00004f20",
+    "value": "0x003b",
+    "name": "Abaddon"
+  },
+  {
+    "address": "0x00004f50",
+    "value": "0x003c",
+    "name": "Shiisaa"
+  },
+  {
+    "address": "0x00004f80",
+    "value": "0x003d",
+    "name": "Sandman"
+  },
+  {
+    "address": "0x00004fb0",
+    "value": "0x003e",
+    "name": "Belial"
+  },
+  {
+    "address": "0x00004fe0",
+    "value": "0x003f",
+    "name": "Leanan Sidhe"
+  },
+  {
+    "address": "0x00005040",
+    "value": "0x0041",
+    "name": "Chernobog"
+  },
+  {
+    "address": "0x000050a0",
+    "value": "0x0043",
+    "name": "Ippon-Datara"
+  },
+  {
+    "address": "0x000050d0",
+    "value": "0x0044",
+    "name": "Orthrus"
+  },
+  {
+    "address": "0x00005100",
+    "value": "0x0045",
+    "name": "Succubus"
+  },
+  {
+    "address": "0x00005130",
+    "value": "0x0046",
+    "name": "Mothman"
+  },
+  {
+    "address": "0x00005190",
+    "value": "0x0048",
+    "name": "Dominion"
+  },
+  {
+    "address": "0x000051c0",
+    "value": "0x0049",
+    "name": "Nekomata"
+  },
+  {
+    "address": "0x00005220",
+    "value": "0x004b",
+    "name": "Arahabaki"
+  },
+  {
+    "address": "0x00005250",
+    "value": "0x004c",
+    "name": "Angel"
+  },
+  {
+    "address": "0x00005280",
+    "value": "0x004d",
+    "name": "Skadi"
+  },
+  {
+    "address": "0x000052b0",
+    "value": "0x004e",
+    "name": "Kikuri-Hime"
+  },
+  {
+    "address": "0x00005310",
+    "value": "0x0050",
+    "name": "Power"
+  },
+  {
+    "address": "0x00005340",
+    "value": "0x0051",
+    "name": "Inugami"
+  },
+  {
+    "address": "0x00005370",
+    "value": "0x0052",
+    "name": "Nebiros"
+  },
+  {
+    "address": "0x000053d0",
+    "value": "0x0054",
+    "name": "Slime"
+  },
+  {
+    "address": "0x00005400",
+    "value": "0x0055",
+    "name": "Anzu"
+  },
+  {
+    "address": "0x000054c0",
+    "value": "0x0059",
+    "name": "Ame-no-Uzume"
+  },
+  {
+    "address": "0x000054f0",
+    "value": "0x005a",
+    "name": "Kushinada"
+  },
+  {
+    "address": "0x00005520",
+    "value": "0x005b",
+    "name": "Kumbhanda"
+  },
+  {
+    "address": "0x00005580",
+    "value": "0x005d",
+    "name": "Kin-Ki"
+  },
+  {
+    "address": "0x000055b0",
+    "value": "0x005e",
+    "name": "Sui-Ki"
+  },
+  {
+    "address": "0x000055e0",
+    "value": "0x005f",
+    "name": "Fuu-Ki"
+  },
+  {
+    "address": "0x00005610",
+    "value": "0x0060",
+    "name": "Jatayu"
+  },
+  {
+    "address": "0x00005640",
+    "value": "0x0061",
+    "name": "Kaiwan"
+  },
+  {
+    "address": "0x00005670",
+    "value": "0x0062",
+    "name": "Kelpie"
+  },
+  {
+    "address": "0x000056a0",
+    "value": "0x0063",
+    "name": "Thoth"
+  },
+  {
+    "address": "0x000056d0",
+    "value": "0x0064",
+    "name": "Dionysus"
+  },
+  {
+    "address": "0x00005700",
+    "value": "0x0065",
+    "name": "Apsaras"
+  },
+  {
+    "address": "0x00005730",
+    "value": "0x0066",
+    "name": "Andras"
+  },
+  {
+    "address": "0x00005790",
+    "value": "0x0068",
+    "name": "Koropokguru"
+  },
+  {
+    "address": "0x000057c0",
+    "value": "0x0069",
+    "name": "Koppa Tengu"
+  },
+  {
+    "address": "0x000057f0",
+    "value": "0x006a",
+    "name": "Regent"
+  },
+  {
+    "address": "0x00005820",
+    "value": "0x006b",
+    "name": "Queen's Necklace"
+  },
+  {
+    "address": "0x00005850",
+    "value": "0x006c",
+    "name": "Stone of Scone"
+  },
+  {
+    "address": "0x00005880",
+    "value": "0x006d",
+    "name": "Koh-i-Noor"
+  },
+  {
+    "address": "0x000058b0",
+    "value": "0x006e",
+    "name": "Orlov"
+  },
+  {
+    "address": "0x000058e0",
+    "value": "0x006f",
+    "name": "Emperor's Amulet"
+  },
+  {
+    "address": "0x00005910",
+    "value": "0x0070",
+    "name": "Hope Diamond"
+  },
+  {
+    "address": "0x00005940",
+    "value": "0x0071",
+    "name": "Crystal Skull"
+  },
+  {
+    "address": "0x00005970",
+    "value": "0x0072",
+    "name": "Orichalcum"
+  },
+  {
+    "address": "0x00005ac0",
+    "value": "0x0079",
+    "name": "Mandrake"
+  },
+  {
+    "address": "0x00005af0",
+    "value": "0x007a",
+    "name": "Baal"
+  },
+  {
+    "address": "0x00005b20",
+    "value": "0x007b",
+    "name": "Dakini"
+  },
+  {
+    "address": "0x00005b50",
+    "value": "0x007c",
+    "name": "Silky"
+  },
+  {
+    "address": "0x00005bb0",
+    "value": "0x007e",
+    "name": "Black Ooze"
+  },
+  {
+    "address": "0x00005be0",
+    "value": "0x007f",
+    "name": "Bicorn"
+  },
+  {
+    "address": "0x00005c10",
+    "value": "0x0080",
+    "name": "Mithras"
+  },
+  {
+    "address": "0x00005c40",
+    "value": "0x0081",
+    "name": "Sudama"
+  },
+  {
+    "address": "0x00005c70",
+    "value": "0x0082",
+    "name": "Kodama"
+  },
+  {
+    "address": "0x00005ca0",
+    "value": "0x0083",
+    "name": "Agathion"
+  },
+  {
+    "address": "0x00005cd0",
+    "value": "0x0084",
+    "name": "Onmoraki"
+  },
+  {
+    "address": "0x00005d00",
+    "value": "0x0085",
+    "name": "Nue"
+  },
+  {
+    "address": "0x00005d30",
+    "value": "0x0086",
+    "name": "Pisaca"
+  },
+  {
+    "address": "0x00005d60",
+    "value": "0x0087",
+    "name": "Melchizedek"
+  },
+  {
+    "address": "0x00005df0",
+    "value": "0x008a",
+    "name": "Naga"
+  },
+  {
+    "address": "0x00005e20",
+    "value": "0x008b",
+    "name": "Garuda"
+  },
+  {
+    "address": "0x00005e50",
+    "value": "0x008c",
+    "name": "Moloch"
+  },
+  {
+    "address": "0x00005eb0",
+    "value": "0x008e",
+    "name": "Belphegor"
+  },
+  {
+    "address": "0x00005ee0",
+    "value": "0x008f",
+    "name": "Berith"
+  },
+  {
+    "address": "0x00005f10",
+    "value": "0x0090",
+    "name": "Choronzon"
+  },
+  {
+    "address": "0x00006060",
+    "value": "0x0097",
+    "name": "Nigi Mitama"
+  },
+  {
+    "address": "0x000060f0",
+    "value": "0x009a",
+    "name": "Saki Mitama"
+  },
+  {
+    "address": "0x00006240",
+    "value": "0x00a1",
+    "name": "Clotho"
+  },
+  {
+    "address": "0x000062a0",
+    "value": "0x00a3",
+    "name": "Atropos"
+  },
+  {
+    "address": "0x00006360",
+    "value": "0x00a7",
+    "name": "Hariti"
+  },
+  {
+    "address": "0x000063c0",
+    "value": "0x00a9",
+    "name": "Hecatoncheires"
+  },
+  {
+    "address": "0x000069c0",
+    "value": "0x00c9",
+    "name": "Arsène"
+  },
+  {
+    "address": "0x000073e0",
+    "value": "0x00ff",
+    "name": "Okuninushi"
+  },
+  {
+    "address": "0x00007740",
+    "value": "0x0111",
+    "name": "Suzaku"
+  },
+  {
+    "address": "0x000077a0",
+    "value": "0x0113",
+    "name": "Genbu"
+  },
+  {
+    "address": "0x00007860",
+    "value": "0x0117",
+    "name": "Jikokuten"
+  },
+  {
+    "address": "0x00007890",
+    "value": "0x0118",
+    "name": "Zouchouten"
+  },
+  {
+    "address": "0x000078f0",
+    "value": "0x011a",
+    "name": "Daisoujou"
+  },
+  {
+    "address": "0x00007950",
+    "value": "0x011c",
+    "name": "White Rider"
+  },
+  {
+    "address": "0x00007980",
+    "value": "0x011d",
+    "name": "Matador"
+  },
+  {
+    "address": "0x000079e0",
+    "value": "0x011f",
+    "name": "Horus"
+  },
+  {
+    "address": "0x00007b60",
+    "value": "0x0127",
+    "name": "Mitra"
+  },
+  {
+    "address": "0x00007d10",
+    "value": "0x0130",
+    "name": "Red Rider"
+  },
+  {
+    "address": "0x00007d40",
+    "value": "0x0131",
+    "name": "Black Rider"
+  },
+  {
+    "address": "0x00009390",
+    "value": "0x01a8",
+    "name": "Macabre"
+  },
+  {
+    "address": "0x000093c0",
+    "value": "0x01a9",
+    "name": "Alilat"
+  },
+  {
+    "address": "0x000093f0",
+    "value": "0x01aa",
+    "name": "Thunderbird"
+  },
+  {
+    "address": "0x00009450",
+    "value": "0x01ac",
+    "name": "Byakhee"
+  },
+  {
+    "address": "0x00009480",
+    "value": "0x01ad",
+    "name": "Hastur"
+  },
+  {
+    "address": "0x000094e0",
+    "value": "0x01af",
+    "name": "Throne"
+  },
+  {
+    "address": "0x00009540",
+    "value": "0x01b1",
+    "name": "Loa"
+  },
+  {
+    "address": "0x00009570",
+    "value": "0x01b2",
+    "name": "Chimera"
+  },
+  {
+    "address": "0x000095d0",
+    "value": "0x01b4",
+    "name": "Cait Sith"
+  }
+]

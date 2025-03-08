@@ -1,0 +1,232 @@
+[
+  {
+    "address": "0x000044d0",
+    "value": "0x0004",
+    "name": "Jack-o'-Lantern"
+  },
+  {
+    "address": "0x00004500",
+    "value": "0x0005",
+    "name": "Jack Frost"
+  },
+  {
+    "address": "0x00004530",
+    "value": "0x0006",
+    "name": "Pixie"
+  },
+  {
+    "address": "0x000045c0",
+    "value": "0x0009",
+    "name": "Eligor"
+  },
+  {
+    "address": "0x00004620",
+    "value": "0x000b",
+    "name": "Hua Po"
+  },
+  {
+    "address": "0x000047d0",
+    "value": "0x0014",
+    "name": "Yaksini"
+  },
+  {
+    "address": "0x000048f0",
+    "value": "0x001a",
+    "name": "High Pixie"
+  },
+  {
+    "address": "0x00004aa0",
+    "value": "0x0023",
+    "name": "Mokoi"
+  },
+  {
+    "address": "0x00004b60",
+    "value": "0x0027",
+    "name": "Incubus"
+  },
+  {
+    "address": "0x00004b90",
+    "value": "0x0028",
+    "name": "Oni"
+  },
+  {
+    "address": "0x00004c20",
+    "value": "0x002b",
+    "name": "Makami"
+  },
+  {
+    "address": "0x00004da0",
+    "value": "0x0033",
+    "name": "Shiki-Ouji"
+  },
+  {
+    "address": "0x00004e00",
+    "value": "0x0035",
+    "name": "Orobas"
+  },
+  {
+    "address": "0x00004e90",
+    "value": "0x0038",
+    "name": "Obariyon"
+  },
+  {
+    "address": "0x00004f50",
+    "value": "0x003c",
+    "name": "Shiisaa"
+  },
+  {
+    "address": "0x00004fe0",
+    "value": "0x003f",
+    "name": "Leanan Sidhe"
+  },
+  {
+    "address": "0x000050a0",
+    "value": "0x0043",
+    "name": "Ippon-Datara"
+  },
+  {
+    "address": "0x000050d0",
+    "value": "0x0044",
+    "name": "Orthrus"
+  },
+  {
+    "address": "0x00005100",
+    "value": "0x0045",
+    "name": "Succubus"
+  },
+  {
+    "address": "0x000051c0",
+    "value": "0x0049",
+    "name": "Nekomata"
+  },
+  {
+    "address": "0x00005250",
+    "value": "0x004c",
+    "name": "Angel"
+  },
+  {
+    "address": "0x00005340",
+    "value": "0x0051",
+    "name": "Inugami"
+  },
+  {
+    "address": "0x000053d0",
+    "value": "0x0054",
+    "name": "Slime"
+  },
+  {
+    "address": "0x000054c0",
+    "value": "0x0059",
+    "name": "Ame-no-Uzume"
+  },
+  {
+    "address": "0x00005670",
+    "value": "0x0062",
+    "name": "Kelpie"
+  },
+  {
+    "address": "0x00005700",
+    "value": "0x0065",
+    "name": "Apsaras"
+  },
+  {
+    "address": "0x00005790",
+    "value": "0x0068",
+    "name": "Koropokguru"
+  },
+  {
+    "address": "0x000057f0",
+    "value": "0x006a",
+    "name": "Regent"
+  },
+  {
+    "address": "0x00005ac0",
+    "value": "0x0079",
+    "name": "Mandrake"
+  },
+  {
+    "address": "0x00005b50",
+    "value": "0x007c",
+    "name": "Silky"
+  },
+  {
+    "address": "0x00005bb0",
+    "value": "0x007e",
+    "name": "Black Ooze"
+  },
+  {
+    "address": "0x00005be0",
+    "value": "0x007f",
+    "name": "Bicorn"
+  },
+  {
+    "address": "0x00005c70",
+    "value": "0x0082",
+    "name": "Kodama"
+  },
+  {
+    "address": "0x00005ca0",
+    "value": "0x0083",
+    "name": "Agathion"
+  },
+  {
+    "address": "0x00005cd0",
+    "value": "0x0084",
+    "name": "Onmoraki"
+  },
+  {
+    "address": "0x00005d00",
+    "value": "0x0085",
+    "name": "Nue"
+  },
+  {
+    "address": "0x00005ee0",
+    "value": "0x008f",
+    "name": "Berith"
+  },
+  {
+    "address": "0x00006060",
+    "value": "0x0097",
+    "name": "Nigi Mitama"
+  },
+  {
+    "address": "0x000069c0",
+    "value": "0x00c9",
+    "name": "Arsène"
+  },
+  {
+    "address": "0x00007740",
+    "value": "0x0111",
+    "name": "Suzaku"
+  },
+  {
+    "address": "0x000077a0",
+    "value": "0x0113",
+    "name": "Genbu"
+  },
+  {
+    "address": "0x00007860",
+    "value": "0x0117",
+    "name": "Jikokuten"
+  },
+  {
+    "address": "0x00007980",
+    "value": "0x011d",
+    "name": "Matador"
+  },
+  {
+    "address": "0x00008820",
+    "value": "0x016b",
+    "name": "Raoul"
+  },
+  {
+    "address": "0x000089a0",
+    "value": "0x0173",
+    "name": "Orpheus Picaro (F)"
+  },
+  {
+    "address": "0x000095d0",
+    "value": "0x01b4",
+    "name": "Cait Sith"
+  }
+]
