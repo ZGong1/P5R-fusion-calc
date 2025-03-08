@@ -20,9 +20,9 @@
 
 
 # TODO
-     - make one python script to do both previous ones combined
-     - Include names from the table found on miraheze.org in the output file
-     - See if different save files actually have consistent addresses for the compendium area I have identified
-     - new script that allows you to sort the "filtered" output by what is actually in your compendium
-     - remove low range (redundant)
-     - last nibble of address found HAS to be 0. I think this sorts out everything properly
+    - add decryption functionality to the web app?
+    - find data for fusion line generation
+    - images of all personas
+    - save list of personas to localstorage
+    - clean up .dec conversion file (very ugly stuff that is written multiple times)
+    - move dictionary.js to util folder
