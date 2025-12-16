@@ -1,0 +1,106 @@
+.hex-viewer-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.hex-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.hex-controls label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.hex-controls select {
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.hex-info {
+    margin-left: auto;
+    font-family: monospace;
+    font-size: 14px;
+    color: #666;
+}
+
+.decrypt-logs {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.decrypt-logs h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.decrypt-logs pre {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #444;
+    overflow-x: auto;
+}
+
+.hex-viewer {
+    font-family: 'Courier New', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 20px;
+    border-radius: 4px;
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.hex-row {
+    display: flex;
+    gap: 20px;
+    white-space: pre;
+}
+
+.hex-row:hover {
+    background: #2d2d30;
+}
+
+.hex-offset {
+    color: #858585;
+    user-select: none;
+}
+
+.hex-bytes {
+    color: #9cdcfe;
+    letter-spacing: 0.5px;
+}
+
+.hex-ascii {
+    color: #ce9178;
+    border-left: 1px solid #3e3e42;
+    padding-left: 15px;
+}
+
+.hex-truncated {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    color: #858585;
+    background: #252526;
+    border-radius: 4px;
+}
