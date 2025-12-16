@@ -103,3 +103,9 @@ coverage/
 *.dat
 *.dec
 *.sav
+
+# Markdown files (local notes/AI generated docs)
+*.md
+
+# TypeScript version (not needed)
+fusion-calculator-core-ts/
