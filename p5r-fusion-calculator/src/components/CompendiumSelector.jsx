@@ -8,6 +8,8 @@ function CompendiumSelector() {
   const [selectedPerson, setSelectedPerson] = useState(personae[0])
   const [query, setQuery] = useState('')
 
+  const MAXIMUM_COMBOBOX_AUTOFILL = 20
+
   console.log("personae: ", personae)
 
   let filteredPersonae =
@@ -17,7 +19,8 @@ function CompendiumSelector() {
           return persona.name.toLowerCase().includes(query.toLowerCase())
         })
 
-    if (filteredPersonae.length > 20) {
+    // Headless UI doesn't implement a proper virtual scrolling implementation, so I'm just not passing the options to the component until its a reasonable size
+    if (filteredPersonae.length > MAXIMUM_COMBOBOX_AUTOFILL) {
         filteredPersonae = []
     }
 
@@ -26,7 +29,7 @@ function CompendiumSelector() {
       <ComboboxInput
         aria-label="Assignee"
         displayValue={(persona) => persona?.name}
-        virtual={{ options: filteredPersonae }}
+        virtual={{ options: filteredPersonae }} // Prevents from rendering everything in background (default behaviour)
         onChange={(event) => setQuery(event.target.value)}
       />
       <ComboboxOptions anchor="bottom" className="border empty:invisible color:black">
