@@ -25,13 +25,13 @@ class FusionCalculator {
      * @returns {PersonaData} The result persona, or null if the fusion is not possible
      */
     fuse(persona1, persona2) {
-        // special fusion
+        // check if this is on the special fusion list, return result immediately
         let result = this.getSpecialFuseResult(persona1, persona2);
         if (result !== null) {
             return result;
         }
 
-        // rare fusion
+        // If one only one persona is rare, differen't fusion function is used
         if ((persona1.rare && !persona2.rare) || (!persona1.rare && persona2.rare)) {
             let rarePersona = persona1.rare? persona1 : persona2;
             let normalPersona = persona1.rare? persona2 : persona1;

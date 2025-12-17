@@ -3,7 +3,7 @@ import { decryptSaveFile } from '../utils/decrypt';
 import HexViewer from './HexViewer';
 import './FileUpload.css';
 
-function FileUpload() {
+function FileUpload({ onDecryptSuccess }) {
     const [decryptedData, setDecryptedData] = useState(null);
     const [logs, setLogs] = useState([]);
     const [error, setError] = useState(null);
@@ -33,6 +33,9 @@ function FileUpload() {
                 console.log('Decryption successful, data size:', result.data.length);
                 setDecryptedData(result.data);
                 setLogs(result.logs);
+
+                // Call the success callback to extract personas
+                onDecryptSuccess(result.data);
             } else {
                 console.error('Decryption failed:', result.error);
                 setError(result.error);
@@ -49,8 +52,9 @@ function FileUpload() {
     return (
         <div className="file-upload-container">
             <div className="upload-section">
-                <h2>P5R Save File Decryptor</h2>
-                <p>Upload an encrypted DATA.DAT file to decrypt and view its contents</p>
+                <h2>P5R Save Analyzer</h2>
+                <p>Upload a DATA.DAT save file to have it analyzed and put into a persona inventory</p>
+                <p>Save data is saved at "%APPDATA%\SEGA\P5R\Steam\76561198088828578\savedata" when using Windows + Steam</p>
 
                 <div className="file-input-wrapper">
                     <input

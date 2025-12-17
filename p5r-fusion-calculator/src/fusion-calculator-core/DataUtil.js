@@ -16,8 +16,7 @@ const customPersonaList = (() => {
         if (personaMap.hasOwnProperty(key)) {
             let persona = personaMap[key];
             persona.name = key;
-            // You can add DLC filtering logic here if needed
-            // if (persona.dlc && !isDlcOwned(key)) continue;
+            // This is where filtering would be done if in the future DLC could be excluded
             arr.push(persona);
         }
     }

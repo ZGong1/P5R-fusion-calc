@@ -22,7 +22,7 @@ function align(v, a) {
 }
 
 /**
- * CRC32 lookup table (from crc.py)
+ * CRC32 lookup table
  */
 const CRC_TABLE = [
   0x00000000, 0x04c11db7, 0x09823b6e, 0x0d4326d9,

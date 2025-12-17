@@ -1,6 +1,12 @@
 .hex-viewer-container {
-    width: 100%;
-    margin-top: 20px;
+  width: 60%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  align-items: center;
+  margin: 20px auto 0 auto;
 }
 
 .hex-controls {
