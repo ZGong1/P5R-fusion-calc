@@ -1,4 +1,4 @@
-// data/dictionary.js
+// data/personaDictionary.js
 
 const personaDictionary = {
     "0x0000": "0",
@@ -171,7 +171,7 @@ const personaDictionary = {
     "0x00A7": "Hariti",
     "0x00A8": "Yurlungur",
     "0x00A9": "Hecatoncheires",
-    "0x00AA": "Satanael (NG+)",
+    "0x00AA": "Satanael",
     "0x00AB": "RESERVE",
     "0x00AC": "RESERVE",
     "0x00AD": "RESERVE",
@@ -195,7 +195,7 @@ const personaDictionary = {
     "0x00BF": "Orpheus Picaro",
     "0x00C0": "Thanatos Picaro",
     "0x00C1": "Izanagi Picaro",
-    "0x00C2": "M. Izanagi Picaro",
+    "0x00C2": "Magatsu-Izanagi Picaro",
     "0x00C3": "Kaguya Picaro",
     "0x00C4": "Ariadne Picaro",
     "0x00C5": "Asterius Picaro",
@@ -366,13 +366,13 @@ const personaDictionary = {
     "0x016A": "Athena",
     "0x016B": "Raoul",
     "0x016C": "Orpheus Telos",
-    "0x016D": "Orpheus (F)",
-    "0x016E": "Izanagi-no-Okami Pic.",
+    "0x016D": "Orpheus F",
+    "0x016E": "Izanagi-no-Okami Picaro",
     "0x016F": "Psyche Picaro",
     "0x0170": "Athena Picaro",
     "0x0171": "Neo Arsène Picaro",
     "0x0172": "Orpheus Telos Picaro",
-    "0x0173": "Orpheus Picaro (F)",
+    "0x0173": "Orpheus F Picaro",
     "0x0174": "P5 Unused",
     "0x0175": "P5 Unused",
     "0x0176": "P5 Unused",
