@@ -99,10 +99,10 @@ coverage/
 *~.nib
 
 # Save files (encrypted/decrypted test files)
-*.DAT
-*.dat
-*.dec
-*.sav
+# *.DAT
+# *.dat
+# *.dec
+# *.sav
 
 # Markdown files (local notes/AI generated docs)
 *.md
