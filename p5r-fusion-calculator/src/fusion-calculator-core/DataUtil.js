@@ -1,5 +1,5 @@
 import { personaMap } from './data/PersonaDataRoyal.js';
-import { arcana2Combos, special2Combos as importedSpecial2Combos, specialCombos } from './data/Data5Royal.js';
+import { arcana2Combos, specialCombos } from './data/Data5Royal.js';
 
 /**
  * Minimal DataUtil for fusion calculations
