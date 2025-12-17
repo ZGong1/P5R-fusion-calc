@@ -61,9 +61,8 @@ All decryption happens in-browser using `crypto-js`, `pako`, and `crc-32`.
 
 ### Persona Extraction
 
-Personas are identified by scanning for the hex pattern `0x01-00-##-##` where `##-##` is the persona UID. The scanner:
-- Searches specific memory ranges (`0x4000-0x5FFF`, `0x6000-0x9FFF`)
-- Filters false positives using nibble rules
+Personas are identified by scanning for the hex pattern `0x01-00-##-##` or `0x01-08-##-##` at 16 byte aligned offsets where `##-##` is the persona UID in little-endian format. The scanner:
+- Searches specific memory range: `0x4000-0x9FFF`
 - Maps UIDs to persona names using a pre-built dictionary
 
 ### Fusion Calculation
@@ -113,8 +112,6 @@ This generates static files in `dist/` that can be deployed to:
 
 ## Known Limitations
 
-- Special fusion personas (3+ personas) may not appear in save file extraction
-- Some false positives may appear in the persona list (can be filtered)
 - DLC personas are included by default
 
 ## Example Save Files
