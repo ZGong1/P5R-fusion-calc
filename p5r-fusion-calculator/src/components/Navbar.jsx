@@ -4,7 +4,8 @@ import './Navbar.css';
 function Navbar({ activeTab, onTabChange }) {
   const tabs = [
     { id: 'saveUpload', label: 'Upload Your Save File' },
-    { id: 'inventory', label: 'Persona Inventory' }
+    { id: 'inventory', label: 'Persona Inventory' },
+    { id: 'allPersonae', label: 'All Personas' }
   ];
 
   return (

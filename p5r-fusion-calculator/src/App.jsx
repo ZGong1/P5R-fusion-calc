@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
+import AllPersonae from './components/AllPersonae'
 import {
   extractPersonas,
   getUniquePersonas,
@@ -57,6 +58,10 @@ function App() {
 
         {activeTab === 'inventory' && (
           <PersonaInventory personas={personas} onClear={handleClearInventory} />
+        )}
+
+        {activeTab === 'allPersonae' && (
+          <AllPersonae />
         )}
       </div>
     </div>
