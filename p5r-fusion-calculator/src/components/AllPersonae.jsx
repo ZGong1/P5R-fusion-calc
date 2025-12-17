@@ -6,10 +6,12 @@ import './AllPersonae.css';
 function AllPersonae ({ props }) {
     
     return (
-        <>
-            <h1>AllPersonae Test</h1>
-            <CompendiumSelector />
-        </>
+        <div className='all-personas'>
+            <div className='persona-selector'>
+                <h1>Compendium of all Personas</h1>
+                Please select a Persona: <CompendiumSelector />
+            </div>
+        </div>
     );
 
 
