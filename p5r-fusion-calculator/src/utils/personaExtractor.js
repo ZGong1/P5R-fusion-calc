@@ -17,42 +17,33 @@ import personaDictionary from '../data/personaDictionary';
 export function extractPersonas(buffer) {
   const results = [];
 
-  for (let i = 0; i < buffer.length - 3; i++) {
-    // Look for the pattern: 0x01 0x00 [byte1] [byte2]
-    if (buffer[i] === 0x01 && buffer[i + 1] === 0x00) {
+  // Optimized: Loop only over valid persona memory range (0x4000 to 0x9FFF)
+  // Increment by 16 since personas are always at 16-byte aligned addresses
+  for (let i = 0x4000; i < 0x9FFF; i += 16) {
+    // Look for the pattern: 0x01 0x00 or 0x01 0x08 [byte1] [byte2] 
+    if ( (buffer[i] === 0x01 && buffer[i + 1] === 0x00) || (buffer[i] === 0x01 && buffer[i + 1] === 0x08) ) {
       const byte1 = buffer[i + 2];
       const byte2 = buffer[i + 3];
-
-      // Check if last nibble of address is 0
-      const lastNibble = i & 0b1111;
 
       // Skip blank entries
       if (byte1 === 0x00 && byte2 === 0x00) {
         continue;
       }
 
-      // Skip if last nibble is not 0
-      if (lastNibble !== 0) {
+      // Convert to little-endian hex format: 0x[byte2][byte1]
+      const uid = `0x${byte2.toString(16).padStart(2, '0')}${byte1.toString(16).padStart(2, '0').toUpperCase()}`;
+      const name = personaDictionary[uid] || "Unknown";
+
+      // Skip if persona is unknown, reserved, or unused
+      if (name === "Unknown" || name.includes("RESERVE") || name.includes("Unused")) {
         continue;
       }
 
-      // Check if address is in valid persona memory ranges
-      if ((i > 0x4000 && i < 0x5FFF) || (i > 0x6000 && i < 0x9FFF)) {
-        // Convert to little-endian hex format: 0x[byte2][byte1]
-        const uid = `0x${byte2.toString(16).padStart(2, '0')}${byte1.toString(16).padStart(2, '0').toUpperCase()}`;
-        const name = personaDictionary[uid] || "Unknown";
-
-        // Skip if persona is unknown, reserved, or unused
-        if (name === "Unknown" || name.includes("RESERVE") || name.includes("Unused")) {
-          continue;
-        }
-
-        results.push({
-          address: `0x${i.toString(16).padStart(8, '0')}`,
-          uid: uid,
-          name: name
-        });
-      }
+      results.push({
+        address: `0x${i.toString(16).padStart(8, '0')}`,
+        uid: uid,
+        name: name
+      });
     }
   }
 
