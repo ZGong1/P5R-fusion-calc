@@ -4,13 +4,12 @@ import { customPersonaList } from '../fusion-calculator-core/DataUtil'
 
 const personae = customPersonaList
 
-function CompendiumSelector() {
-  const [selectedPerson, setSelectedPerson] = useState(personae[0])
+function CompendiumSelector( {selectedPersona, setSelectedPersona} ) {
   const [query, setQuery] = useState('')
 
   const MAXIMUM_COMBOBOX_AUTOFILL = 20
 
-  console.log("personae: ", personae)
+//   console.log("personae: ", personae)
 
   let filteredPersonae =
     query === ''
@@ -25,7 +24,7 @@ function CompendiumSelector() {
     }
 
   return (
-    <Combobox value={selectedPerson} onChange={setSelectedPerson} onClose={() => setQuery('')}>
+    <Combobox value={selectedPersona} onChange={setSelectedPersona} onClose={() => setQuery('')}>
       <ComboboxInput
         aria-label="Assignee"
         displayValue={(persona) => persona?.name}
