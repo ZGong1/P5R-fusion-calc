@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
 import AllPersonae from './components/AllPersonae'
+import Fusions from './components/Fusions'
 import {
   extractPersonas,
   getUniquePersonas,
@@ -72,6 +73,10 @@ function App() {
             selectedPersona={selectedPersona} 
             setSelectedPersona={setSelectedPersona}/>
         )}
+
+        {activeTab === 'fusion' &&
+          <Fusions/>
+        }
       </div>
     </div>
   )
