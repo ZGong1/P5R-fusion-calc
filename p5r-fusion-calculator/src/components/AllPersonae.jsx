@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CompendiumSelector from './CompendiumSelector';
+import FullPersonaCard from './FullPersonaCard';
 import './AllPersonae.css';
 
 
@@ -14,6 +15,9 @@ function AllPersonae ({ props }) {
                 Please select a Persona: <CompendiumSelector selectedPersona={selectedPersona} setSelectedPersona={setSelectedPersona} />
             </div>
 
+            {console.log("selectedPersona: ", selectedPersona)}
+
+            <FullPersonaCard selectedPersona={selectedPersona}/>
 
         </div>
     );
