@@ -109,3 +109,6 @@ coverage/
 
 # TypeScript version (not needed)
 fusion-calculator-core-ts/
+
+# Zip files for deploying to another box
+*.zip
