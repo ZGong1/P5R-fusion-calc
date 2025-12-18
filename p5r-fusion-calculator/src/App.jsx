@@ -50,7 +50,9 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar activeTab={activeTab} onTabChange={setActiveTab} />
+      <Navbar 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab} />
 
       <div className="app-content">
         {activeTab === 'saveUpload' && (
@@ -58,11 +60,17 @@ function App() {
         )}
 
         {activeTab === 'inventory' && (
-          <PersonaInventory personas={personas} onClear={handleClearInventory} />
+          <PersonaInventory 
+            personas={personas} 
+            onClear={handleClearInventory} 
+            setActiveTab={setActiveTab}
+            setSelectedPersona={setSelectedPersona}/>
         )}
 
         {activeTab === 'allPersonae' && (
-          <AllPersonae selectedPersona={selectedPersona} setSelectedPersona={setSelectedPersona}/>
+          <AllPersonae 
+            selectedPersona={selectedPersona} 
+            setSelectedPersona={setSelectedPersona}/>
         )}
       </div>
     </div>

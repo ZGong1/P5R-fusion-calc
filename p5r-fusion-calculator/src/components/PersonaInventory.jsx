@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { personaMap } from '../fusion-calculator-core/data/PersonaDataRoyal.js';
 import './PersonaInventory.css';
 
-function PersonaInventory({ personas, onClear }) {
+function PersonaInventory({ personas, onClear, setActiveTab, setSelectedPersona }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name'); // 'name', 'level', 'arcana'
   const [filterArcana, setFilterArcana] = useState('all');
@@ -39,6 +39,11 @@ function PersonaInventory({ personas, onClear }) {
       }
     });
 
+  /*
+  * For if persona inventory is empty:
+  * I don't believe its possible to get a save file without a persona as I'm pretty sure
+  * you obtain arsene before the ability to save
+  */  
   if (personas.length === 0) {
     return (
       <div className="inventory-empty">
@@ -52,11 +57,9 @@ function PersonaInventory({ personas, onClear }) {
     <div className="persona-inventory">
       <div className="inventory-header">
         <h2>Persona Inventory ({personas.length} total)</h2>
-        {onClear && (
-          <button className="clear-button" onClick={onClear}>
-            Clear Inventory
-          </button>
-        )}
+        <button className="clear-button" onClick={onClear}>
+          Clear Inventory
+        </button>
       </div>
 
       <div className="inventory-controls">
@@ -100,7 +103,10 @@ function PersonaInventory({ personas, onClear }) {
           const skills = personaData?.skills ? Object.entries(personaData.skills) : [];
 
           return (
-            <div key={`${persona.uid}-${index}`} className="persona-card">
+            <div key={`${persona.uid}-${index}`} className="persona-card" onClick={ () => {
+              setSelectedPersona(persona.name)
+              setActiveTab("allPersonae")
+            }}>
               <div className="persona-card-header">
                 <h3 className="persona-name">{persona.name}</h3>
               </div>
