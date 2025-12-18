@@ -2,7 +2,7 @@ import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headl
 import { useState } from 'react'
 import { customPersonaList } from '../fusion-calculator-core/DataUtil'
 
-const personae = customPersonaList
+const personae = customPersonaList.map( (object) => object.name )
 
 function CompendiumSelector( {selectedPersona, setSelectedPersona} ) {
   const [query, setQuery] = useState('')
@@ -15,26 +15,28 @@ function CompendiumSelector( {selectedPersona, setSelectedPersona} ) {
     query === ''
       ? personae
       : personae.filter((persona) => {
-          return persona.name.toLowerCase().includes(query.toLowerCase())
+          return persona.toLowerCase().includes(query.toLowerCase())
         })
+  // console.log("filteredPersonae: ", filteredPersonae)
+  // console.log("personae: ", personae)
 
-    // Headless UI doesn't implement a proper virtual scrolling implementation, so I'm just not passing the options to the component until its a reasonable size
-    if (filteredPersonae.length > MAXIMUM_COMBOBOX_AUTOFILL) {
-        filteredPersonae = []
-    }
+  // Headless UI doesn't implement a proper virtual scrolling implementation, so I'm just not passing the options to the component until its a reasonable size
+  if (filteredPersonae.length > MAXIMUM_COMBOBOX_AUTOFILL) {
+      filteredPersonae = []
+  }
 
   return (
     <Combobox value={selectedPersona} onChange={setSelectedPersona} onClose={() => setQuery('')}>
       <ComboboxInput
         aria-label="Assignee"
-        displayValue={(persona) => persona?.name}
+        displayValue={(persona) => persona}
         virtual={{ options: filteredPersonae }} // Prevents from rendering everything in background (default behaviour)
         onChange={(event) => setQuery(event.target.value)}
       />
       <ComboboxOptions anchor="bottom" className="border empty:invisible color:black">
         {filteredPersonae.map((persona) => (
-          <ComboboxOption key={persona.id} value={persona} className="data-focus:bg-blue-100 color:black">
-            {persona.name}
+          <ComboboxOption key={persona} value={persona} className="data-focus:bg-blue-100 color:black">
+            {persona}
           </ComboboxOption>
         ))}
       </ComboboxOptions>

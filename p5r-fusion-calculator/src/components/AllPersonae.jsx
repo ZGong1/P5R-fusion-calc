@@ -14,7 +14,7 @@ function AllPersonae ({ selectedPersona, setSelectedPersona }) {
                 Please select a Persona: <CompendiumSelector selectedPersona={selectedPersona} setSelectedPersona={setSelectedPersona} />
             </div>
 
-            {console.log("selectedPersona: ", selectedPersona)}
+            {/* {console.log("selectedPersona: ", selectedPersona)} */}
 
             <FullPersonaCard selectedPersona={selectedPersona}/>
 

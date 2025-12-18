@@ -1,26 +1,30 @@
+import { customPersonaList } from '../fusion-calculator-core/DataUtil';
+
 import './FullPersonaCard.css'
 
 function FullPersonaCard( {selectedPersona} ) {
 
-    if (!selectedPersona?.name) return "Please select a Persona"
+    if (!selectedPersona) return "Please select a Persona"
+
+    const personaWithInfo = customPersonaList.find( persona => persona.name === selectedPersona)
 
     return (
-        <div class="stats-card">
+        <div className="stats-card">
             {/* Name */}
-            <div class="sc1"> <h1>{selectedPersona?.name} </h1></div>
+            <div className="sc1"> <h1>{personaWithInfo?.name} </h1></div>
             {/* Details */}
-            <div class="sc2">
-                <strong>Arcana:</strong> {selectedPersona?.arcana} <br/>
-                <strong>Itemization:</strong> {selectedPersona?.item}/{selectedPersona?.itemr} <br/>
-                <strong>Trait:</strong> {selectedPersona?.trait} <br/>
-                <strong>Inherits:</strong> {selectedPersona?.inherits} <br/>
-                <strong>Base Level:</strong> {selectedPersona?.level} <br/>
+            <div className="sc2">
+                <strong>Arcana:</strong> {personaWithInfo?.arcana} <br/>
+                <strong>Itemization:</strong> {personaWithInfo?.item}/{personaWithInfo?.itemr} <br/>
+                <strong>Trait:</strong> {personaWithInfo?.trait} <br/>
+                <strong>Inherits:</strong> {personaWithInfo?.inherits} <br/>
+                <strong>Base Level:</strong> {personaWithInfo?.level} <br/>
             </div>
             {/* Skills */}
-            <div class="sc3">
+            <div className="sc3">
                 <strong>Skills:</strong>
                 {
-                    Object.entries(selectedPersona?.skills).map(([skill, levelObtained]) => (
+                    Object.entries(personaWithInfo?.skills).map(([skill, levelObtained]) => (
                         <div key={skill}>
                             {skill} (Lv. {levelObtained})
                         </div>
@@ -28,7 +32,7 @@ function FullPersonaCard( {selectedPersona} ) {
                 }
             </div>
             {/* Affinities */}
-            <div class="sc4"> 
+            <div className="sc4"> 
                 <strong>Affinities:</strong>
                  <table>
                     <tr>
@@ -45,7 +49,7 @@ function FullPersonaCard( {selectedPersona} ) {
                     </tr>
                     <tr>
                         {
-                            selectedPersona?.elems.map((value, index) => (
+                            personaWithInfo?.elems.map((value, index) => (
                                 <td key={index}>{value}</td>
                             ))
                         }
@@ -53,7 +57,7 @@ function FullPersonaCard( {selectedPersona} ) {
                  </table>
             </div>
             {/* Stats */}
-            <div class="sc5">
+            <div className="sc5">
                 <strong>Stats:</strong> 
                 <table>
                     <tr>
@@ -65,7 +69,7 @@ function FullPersonaCard( {selectedPersona} ) {
                     </tr>
                     <tr>
                         {
-                            selectedPersona?.stats.map((value, index) => (
+                            personaWithInfo?.stats.map((value, index) => (
                                 <td key={index}>{value}</td>
                             ))
                         }
@@ -73,7 +77,7 @@ function FullPersonaCard( {selectedPersona} ) {
                 </table>
             </div>
             {/* Location */}
-            <div class="sc6"> Location: </div>
+            <div className="sc6"> Location: </div>
         </div>
     );
 }
