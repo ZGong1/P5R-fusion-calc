@@ -1,11 +1,15 @@
+import CompendiumSelector from './CompendiumSelector'
 import './Fusions.css'
 
 
-function Fusions( {} ) {
+function Fusions({ selectedFusion, setSelectedFusion }) {
 
   return (
     <>
-      Fusions Component Test
+      Please select which Persona you would like to fuse:
+      <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={setSelectedFusion}/> <br/>
+
+      You have selected {selectedFusion} for a fusion calculation
     </>
   )
 

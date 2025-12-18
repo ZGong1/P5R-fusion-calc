@@ -15,8 +15,10 @@ import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('saveUpload')
+  // personas is important because it is the inventory of actually owned personas
   const [personas, setPersonas] = useState([])
   const [selectedPersona, setSelectedPersona] = useState("")
+  const [selectedFusion, setSelectedFusion] = useState("")
 
   // Load personas from localStorage on mount
   useEffect(() => {
@@ -75,7 +77,9 @@ function App() {
         )}
 
         {activeTab === 'fusion' &&
-          <Fusions/>
+          <Fusions
+            selectedFusion={selectedFusion}
+            setSelectedFusion={setSelectedFusion}/>
         }
       </div>
     </div>
