@@ -54,7 +54,7 @@ function FileUpload({ onDecryptSuccess }) {
             <div className="upload-section">
                 <h2>P5R Save Analyzer</h2>
                 <p>Upload a DATA.DAT save file to have it analyzed and put into a persona inventory</p>
-                <p>Save data is saved at "%APPDATA%\SEGA\P5R\Steam\76561198088828578\savedata" when using Windows + Steam</p>
+                <p>Save data is saved at "%APPDATA%\SEGA\P5R\Steam\[your steam ID]\savedata" when using Windows + Steam</p>
 
                 <div className="file-input-wrapper">
                     <input
