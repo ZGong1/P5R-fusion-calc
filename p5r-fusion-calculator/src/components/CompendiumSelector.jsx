@@ -1,6 +1,7 @@
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
 import { useState } from 'react'
 import { customPersonaList } from '../fusion-calculator-core/DataUtil'
+import './CompendiumSelector.css'
 
 const personae = customPersonaList.map( (object) => object.name )
 

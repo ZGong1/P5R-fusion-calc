@@ -1,0 +1,64 @@
+.compendium-selector {
+    width: 100%;
+}
+
+/* Style the Headless UI Combobox input */
+[data-headlessui-state] input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    background: white;
+    color: #333;
+}
+
+[data-headlessui-state] input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* Style the dropdown options */
+[data-headlessui-state~="open"] {
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Individual option styling */
+[role="option"] {
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #333;
+}
+
+[role="option"]:hover,
+[data-focus] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* Scrollbar styling for options */
+[data-headlessui-state~="open"]::-webkit-scrollbar {
+    width: 8px;
+}
+
+[data-headlessui-state~="open"]::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+
+[data-headlessui-state~="open"]::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 6px;
+}
+
+[data-headlessui-state~="open"]::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
