@@ -15,6 +15,7 @@ import './App.css'
 function App() {
   const [activeTab, setActiveTab] = useState('saveUpload')
   const [personas, setPersonas] = useState([])
+  const [selectedPersona, setSelectedPersona] = useState("")
 
   // Load personas from localStorage on mount
   useEffect(() => {
@@ -61,7 +62,7 @@ function App() {
         )}
 
         {activeTab === 'allPersonae' && (
-          <AllPersonae />
+          <AllPersonae selectedPersona={selectedPersona} setSelectedPersona={setSelectedPersona}/>
         )}
       </div>
     </div>

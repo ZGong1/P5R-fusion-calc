@@ -4,9 +4,8 @@ import FullPersonaCard from './FullPersonaCard';
 import './AllPersonae.css';
 
 
-function AllPersonae ({ props }) {
+function AllPersonae ({ selectedPersona, setSelectedPersona }) {
 
-    const [selectedPersona, setSelectedPersona] = useState("")
     
     return (
         <div className='all-personas'>
