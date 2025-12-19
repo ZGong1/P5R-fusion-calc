@@ -16,6 +16,9 @@ const CRYPT_KEY_BASE64 = "3lOZS0kYSoOOtkC4c7IDfvNXnxIprUPTlUGVC3yBJF0=";
 
 /**
  * Align value to boundary
+ * @param {number} v - Value to align
+ * @param {number} a - Alignment boundary
+ * @returns {number} Aligned value
  */
 function align(v, a) {
   return (v + (a - 1)) & ~(a - 1);
@@ -93,6 +96,9 @@ const CRC_TABLE = [
 
 /**
  * Calculate CRC32 (matches Python calc_crc)
+ * @param {ArrayBuffer|Uint8Array} buffer - Buffer to calculate CRC for
+ * @param {number} [init=0xffffffff] - Initial CRC value
+ * @returns {number} Calculated CRC32 value
  */
 function calcCrc(buffer, init = 0xffffffff) {
   const arr = new Uint8Array(buffer);
@@ -106,22 +112,40 @@ function calcCrc(buffer, init = 0xffffffff) {
 }
 
 /**
- * Read little-endian values from buffer
+ * Read 32-bit unsigned integer in little-endian format
+ * @param {ArrayBuffer} buffer - Buffer to read from
+ * @param {number} offset - Byte offset
+ * @returns {number} Unsigned 32-bit integer
  */
 function readUInt32LE(buffer, offset) {
   const view = new DataView(buffer);
   return view.getUint32(offset, true);
 }
 
+/**
+ * Read 16-bit unsigned integer in little-endian format
+ * @param {ArrayBuffer} buffer - Buffer to read from
+ * @param {number} offset - Byte offset
+ * @returns {number} Unsigned 16-bit integer
+ */
 function readUInt16LE(buffer, offset) {
   const view = new DataView(buffer);
   return view.getUint16(offset, true);
 }
 
 /**
- * Main decryption function
- * @param {ArrayBuffer} arrayBuffer - Encrypted P5R save file
- * @returns {Object} { success: boolean, data: Uint8Array, error?: string, logs?: string[] }
+ * Decryption result object
+ * @typedef {Object} DecryptionResult
+ * @property {boolean} success - Whether decryption was successful
+ * @property {Uint8Array} [data] - Decrypted save file data (only present if success is true)
+ * @property {string} [error] - Error message (only present if success is false)
+ * @property {string[]} [logs] - Decryption process logs
+ */
+
+/**
+ * Main decryption function for Persona 5 Royal save files
+ * @param {ArrayBuffer} arrayBuffer - Encrypted P5R save file (DATA.DAT)
+ * @returns {DecryptionResult} Decryption result with data or error
  */
 function decryptSaveFile(arrayBuffer) {
   const logs = [];
