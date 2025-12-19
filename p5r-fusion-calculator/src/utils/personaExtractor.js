@@ -150,11 +150,17 @@ export function fusable(toFuse, ownedPersonas, calculator) {
 
   console.log("possibleFusions: ", possibleFusions)
 
+  // Create a Set of owned persona names for O(1) lookup
+  const ownedSet = new Set(ownedPersonas.map(p => p.name))
+
   for (let fusion of possibleFusions) {
-    // TODO: actually printing now
-    console.log("fusion.cost: ", fusion.cost)
+    // Check if ALL sources are owned
+    const isFusionFound = fusion.sources.every(source => ownedSet.has(source.name))
+
+    if (isFusionFound) { return true }
   }
 
+  return false
 }
 
 
@@ -167,16 +173,36 @@ export function saveFusableToLocalStorage(ownedPersonas) {
 
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
-  let toReturn = []
+  let fusablePersonas = []
+  let notFusablePersonas = []
+
   // Create a Set of owned persona names for O(1) lookup
   const ownedSet = new Set(ownedPersonas.map(p => p.name))
-  const allPersonas = Object.entries(personaMap).map( ([personaName, personaData]) => personaName)
+  const allPersonas = Object.entries(personaMap).map( ([personaName]) => personaName)
 
   const unownedPersonas = allPersonas.filter(persona => !ownedSet.has(persona))
 
-  console.log("unownedPersonas: ", unownedPersonas)
-  
-  fusable(unownedPersonas[1], ownedPersonas, calculator)
 
-  return toReturn
+  // Loop through all unowned personas and check if they're fusable
+  unownedPersonas.forEach(personaName => {
+    const isFusable = fusable(personaName, ownedPersonas, calculator)
+
+    if (isFusable) {
+      fusablePersonas.push(personaName)
+      console.log(`${personaName} - CAN fuse with current inventory`)
+    } else {
+      notFusablePersonas.push(personaName)
+      console.log(`${personaName} - Cannot fuse yet`)
+    }
+  })
+
+  // Save fusable personas to localStorage
+  try {
+    localStorage.setItem('p5r-fusable-personas', JSON.stringify(fusablePersonas))
+    console.log(`💾 Saved ${fusablePersonas.length} fusable personas to localStorage`)
+  } catch (error) {
+    console.error('Error saving fusable personas to localStorage:', error)
+  }
+
+  return fusablePersonas
 }
