@@ -5,7 +5,7 @@ import './Fusions.css'
 import SmallPersona from './SmallPersona';
 
 
-function Fusions({ selectedFusion, setSelectedFusion }) {
+function Fusions({ selectedFusion, setSelectedFusion, personas }) {
 
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
@@ -24,12 +24,16 @@ function Fusions({ selectedFusion, setSelectedFusion }) {
       <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={setSelectedFusion}/> <br/>
 
       {/* {console.log("gottenRecipes: ", gottenRecipes)} */}
-      {gottenRecipes ? gottenRecipes?.length + " recipes were found" : ""}
+      {/* {gottenRecipes ? gottenRecipes?.length + " recipes were found" : ""} */}
+      
+
+      {/* Loop through 1 level fusions for selectedFusion */}
       {gottenRecipes?.map( (recipe, index) => (<div key={index} className='recipe-wrapper'>
 
-        <SmallPersona name={recipe.sources[0].name}/>
-        <SmallPersona name={recipe.sources[1].name}/>
-        {/* {recipe.sources[0].name} + {recipe.sources[1].name} */}
+        {/* Map instead of just show 2 to handle special fusions that involve more than 2 soners */}
+        {recipe.sources.map( persona => (
+          <SmallPersona name={persona.name} personas={personas}/>
+        ))}
 
       </div>))}
 
