@@ -132,7 +132,7 @@ export function getLastUpdateTime() {
  * Returns Boolean if a persona is fusable (there is at least one branch below where both personas are owned)
  * @param {String} toFuse - String of the name of the persona you want to check
  * @param {Array} ownedPersonas - Array with strings of the personas the player has
- * @param {FusionCalculator} - An already setup fusion calculator object
+ * @param {FusionCalculator} calculator - A setup fusion calculator object
  * @returns {Boolean} True/False if there is an immediate path to fuse with owned personas
  */
 export function fusable(toFuse, ownedPersonas, calculator) {
