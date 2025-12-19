@@ -1,4 +1,6 @@
 import personaDictionary from '../data/personaDictionary';
+import { customPersonaeByArcana, personaMap } from '../fusion-calculator-core/DataUtil';
+import FusionCalculator from '../fusion-calculator-core/FusionCalculator';
 
 /**
  * Extracts personas from a decrypted P5R save file buffer
@@ -123,4 +125,50 @@ export function getLastUpdateTime() {
     console.error('Error reading localStorage:', error);
     return null;
   }
+}
+
+
+/**
+ * Returns Boolean if a persona is fusable (there is at least one branch below where both personas are owned)
+ * @param {String} toFuse - String of the name of the persona you want to check
+ * @param {Array} ownedPersonas - Array with strings of the personas the player has
+ * @param {FusionCalculator} - An already setup fusion calculator object
+ * @returns {Boolean} True/False if there is an immediate path to fuse with owned personas
+ */
+export function fusable(toFuse, ownedPersonas, calculator) {
+  const toFuseWithData = personaMap[toFuse]
+  console.log("toFuseWithData: ", toFuseWithData)
+  const possibleFusions = calculator.getRecipes(toFuseWithData)
+
+  console.log("possibleFusions: ", possibleFusions)
+
+  for (let fusion of possibleFusions) {
+    // TODO: actually printing now
+    console.log("fusion.cost: ", fusion.cost)
+  }
+
+}
+
+
+/**
+ * Gets unique personas from extraction results (removes duplicates)
+ * @param {Array} ownedPersonas - Array of persona objects that the player has in their compendium
+ * @returns {Array} Array of personas that are directly fusable with current compendium
+ */
+export function saveFusableToLocalStorage(ownedPersonas) {
+
+  const calculator = new FusionCalculator(customPersonaeByArcana)
+
+  let toReturn = []
+  // Create a Set of owned persona names for O(1) lookup
+  const ownedSet = new Set(ownedPersonas.map(p => p.name))
+  const allPersonas = Object.entries(personaMap).map( ([personaName, personaData]) => personaName)
+
+  const unownedPersonas = allPersonas.filter(persona => !ownedSet.has(persona))
+
+  console.log("unownedPersonas: ", unownedPersonas)
+  
+  fusable(unownedPersonas[1], ownedPersonas, calculator)
+
+  return toReturn
 }

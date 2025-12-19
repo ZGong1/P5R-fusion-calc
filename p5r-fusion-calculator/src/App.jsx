@@ -9,14 +9,16 @@ import {
   getUniquePersonas,
   savePersonasToLocalStorage,
   loadPersonasFromLocalStorage,
-  clearPersonasFromLocalStorage
+  clearPersonasFromLocalStorage,
+  saveFusableToLocalStorage
 } from './utils/personaExtractor'
 import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('saveUpload')
-  // personas is important because it is the inventory of actually owned personas
+  // list of actually owned personas by the user
   const [personas, setPersonas] = useState([])
+  const [fusableImmediate, setFusableImmediate] = useState([])
   const [selectedPersona, setSelectedPersona] = useState("")
   const [selectedFusion, setSelectedFusion] = useState("")
 
@@ -40,6 +42,11 @@ function App() {
 
     setPersonas(uniquePersonas)
     savePersonasToLocalStorage(uniquePersonas)
+    
+    // also save list of directly fusable (has both components to make in compendium) personas
+    // saved to state below, and saved to localStorage in the function that also returns the list
+    const fusableRN = saveFusableToLocalStorage(uniquePersonas)
+    setFusableImmediate(fusableRN)
   }
 
   // Clear persona inventory
@@ -79,7 +86,8 @@ function App() {
         {activeTab === 'fusion' &&
           <Fusions
             selectedFusion={selectedFusion}
-            setSelectedFusion={setSelectedFusion}/>
+            setSelectedFusion={setSelectedFusion}
+            personas={personas}/>
         }
       </div>
     </div>
