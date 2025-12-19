@@ -3,14 +3,6 @@ import { customPersonaeByArcana, personaMap } from '../fusion-calculator-core/Da
 import FusionCalculator from '../fusion-calculator-core/FusionCalculator';
 
 /**
- * @typedef {import('../types').PersonaData} PersonaData
- * @typedef {import('../types').ExtractedPersona} ExtractedPersona
- * @typedef {import('../types').Recipe} Recipe
- * @typedef {import('../types').PersonaMap} PersonaMap
- * @typedef {import('../types').PersonaeByArcana} PersonaeByArcana
- */
-
-/**
  * Extracts personas from a decrypted P5R save file buffer
  *
  * Scans for the pattern: 0x01 0x00 [byte1] [byte2]
@@ -20,9 +12,6 @@ import FusionCalculator from '../fusion-calculator-core/FusionCalculator';
  * - Memory ranges: 0x4000-0x5FFF or 0x6000-0x9FFF
  * - Last nibble of address must be 0
  * - Skips blank entries (0x00 0x00)
- *
- * @param {Uint8Array} buffer - The decrypted save file buffer
- * @returns {ExtractedPersona[]} Array of persona objects with {address, uid, name}
  */
 export function extractPersonas(buffer) {
   const results = [];
@@ -62,8 +51,8 @@ export function extractPersonas(buffer) {
 
 /**
  * Gets unique personas from extraction results (removes duplicates)
- * @param {ExtractedPersona[]} personas - Array of persona objects from extractPersonas
- * @returns {ExtractedPersona[]} Array of unique personas
+ * @param {Array} personas - Array of persona objects from extractPersonas
+ * @returns {Array} Array of unique personas
  */
 export function getUniquePersonas(personas) {
   const uniqueMap = new Map();
@@ -79,7 +68,7 @@ export function getUniquePersonas(personas) {
 
 /**
  * Saves persona inventory to localStorage
- * @param {ExtractedPersona[]} personas - Array of persona objects to save
+ * @param {Array} personas - Array of persona objects to save
  */
 export function savePersonasToLocalStorage(personas) {
   try {
@@ -96,7 +85,7 @@ export function savePersonasToLocalStorage(personas) {
 
 /**
  * Loads persona inventory from localStorage
- * @returns {ExtractedPersona[]|null} Array of persona objects or null if not found
+ * @returns {Array|null} Array of persona objects or null if not found
  */
 export function loadPersonasFromLocalStorage() {
   try {
@@ -112,7 +101,7 @@ export function loadPersonasFromLocalStorage() {
 
 /**
  * Loads persona inventory from localStorage
- * @returns {string[]|null} Array of persona strings or null if not found
+ * @returns {Array|null} Array of persona strings or null if not found
  */
 export function loadFusableImmediateFromLocalStorage() {
   try {
@@ -154,10 +143,10 @@ export function getLastUpdateTime() {
 
 /**
  * Returns Boolean if a persona is fusable (there is at least one branch below where both personas are owned)
- * @param {string} toFuse - String of the name of the persona you want to check
- * @param {ExtractedPersona[]} ownedPersonas - Array with strings of the personas the player has
- * @param {FusionCalculator} calculator - A setup fusion calculator object
- * @returns {boolean} True/False if there is an immediate path to fuse with owned personas
+ * @param {String} toFuse - String of the name of the persona you want to check
+ * @param {Array} ownedPersonas - Array with strings of the personas the player has
+ * @param {Object} calculator - A setup fusion calculator object
+ * @returns {Boolean} True/False if there is an immediate path to fuse with owned personas
  */
 export function fusable(toFuse, ownedPersonas, calculator) {
   const toFuseWithData = personaMap[toFuse]
@@ -182,8 +171,8 @@ export function fusable(toFuse, ownedPersonas, calculator) {
 
 /**
  * Gets personas that are directly fusable with current compendium
- * @param {ExtractedPersona[]} ownedPersonas - Array of persona objects that the player has in their compendium
- * @returns {string[]} Array of personas that are directly fusable with current compendium
+ * @param {Array} ownedPersonas - Array of persona objects that the player has in their compendium
+ * @returns {Array} Array of personas that are directly fusable with current compendium
  */
 export function saveFusableToLocalStorage(ownedPersonas) {
 
