@@ -10,7 +10,7 @@ import {
   savePersonasToLocalStorage,
   loadPersonasFromLocalStorage,
   clearPersonasFromLocalStorage,
-  saveFusableToLocalStorage
+  saveFusableToLocalStorage, loadFusableImmediateFromLocalStorage
 } from './utils/personaExtractor'
 import './App.css'
 
@@ -22,12 +22,20 @@ function App() {
   const [selectedPersona, setSelectedPersona] = useState("")
   const [selectedFusion, setSelectedFusion] = useState("")
 
-  // Load personas from localStorage on mount
+  // Load data from localStorage
   useEffect(() => {
+    // Load owned personas from local storage if they exist
     const stored = loadPersonasFromLocalStorage()
     if (stored && stored.length > 0) {
       setPersonas(stored)
-      console.log(`Loaded ${stored.length} personas from localStorage`)
+      console.log(`Loaded ${stored.length} owned personas from localStorage`)
+    }
+
+    // Load fusable personas from local storage if they exist
+    const storedFusableImmediate = loadFusableImmediateFromLocalStorage()
+    if (stored && stored.length > 0) {
+      setFusableImmediate(storedFusableImmediate)
+      console.log(`Loaded ${stored.length} fusable personas from localStorage`)
     }
   }, [])
 
@@ -87,7 +95,8 @@ function App() {
           <Fusions
             selectedFusion={selectedFusion}
             setSelectedFusion={setSelectedFusion}
-            personas={personas}/>
+            personas={personas}
+            fusableImmediate={fusableImmediate}/>
         }
       </div>
     </div>

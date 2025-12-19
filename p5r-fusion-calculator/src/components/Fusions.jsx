@@ -5,7 +5,7 @@ import './Fusions.css'
 import SmallPersona from './SmallPersona';
 
 
-function Fusions({ selectedFusion, setSelectedFusion, personas }) {
+function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate }) {
 
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
@@ -32,7 +32,7 @@ function Fusions({ selectedFusion, setSelectedFusion, personas }) {
 
         {/* Map instead of just show 2 to handle special fusions that involve more than 2 soners */}
         {recipe.sources.map( persona => (
-          <SmallPersona name={persona.name} personas={personas}/>
+          <SmallPersona name={persona.name} personas={personas} fusableImmediate={fusableImmediate}/>
         ))}
 
       </div>))}

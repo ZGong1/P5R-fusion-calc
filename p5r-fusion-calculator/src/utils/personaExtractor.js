@@ -111,6 +111,22 @@ export function loadPersonasFromLocalStorage() {
 }
 
 /**
+ * Loads persona inventory from localStorage
+ * @returns {string[]|null} Array of persona strings or null if not found
+ */
+export function loadFusableImmediateFromLocalStorage() {
+  try {
+    const stored = localStorage.getItem('p5r-fusable-personas');
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (error) {
+    console.error('Error loading from localStorage:', error);
+  }
+  return null;
+}
+
+/**
  * Clears persona inventory from localStorage
  */
 export function clearPersonasFromLocalStorage() {
