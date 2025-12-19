@@ -8,30 +8,21 @@ import {
 import { rarePersonae, rareCombos, specialCombos } from './data/Data5Royal.js';
 
 /**
- * @typedef {import('../types').PersonaData} PersonaData
- * @typedef {import('../types').Recipe} Recipe
- * @typedef {import('../types').PersonaeByArcana} PersonaeByArcana
- */
-
-/**
  * Persona fusion calculator. Provides method for fusing 2 persona
  * and getting recipes for a persona.
  *
  * Created by Chin on 08-Apr-17.
  */
 class FusionCalculator {
-    /**
-     * @param {PersonaeByArcana} personaeByArcana - Personas organized by arcana
-     */
     constructor(personaeByArcana) {
         this.personaeByArcana = personaeByArcana;
     }
 
     /**
      * Fuse 2 persona. This can handle normal fusion, rare fusion or special fusion.
-     * @param {PersonaData} persona1 - First persona to fuse
-     * @param {PersonaData} persona2 - Second persona to fuse
-     * @returns {PersonaData|null} The result persona, or null if the fusion is not possible
+     * @param persona1 First persona to fuse
+     * @param persona2 Second persona to fuse
+     * @returns {PersonaData} The result persona, or null if the fusion is not possible
      */
     fuse(persona1, persona2) {
         // check if this is on the special fusion list, return result immediately
@@ -55,7 +46,7 @@ class FusionCalculator {
 
     /**
      * Get all 2-fusion recipes with the given persona as one of the ingredients
-     * @param {PersonaData} persona - The persona to fuse from
+     * @param persona The persona to fuse from
      * @returns {Recipe[]} The list of recipes. In each recipe's sources, the given persona
      * is guaranteed to be the first one.
      */
@@ -78,9 +69,9 @@ class FusionCalculator {
 
     /**
      * Return the result persona if 2 given persona are part of a special formula
-     * @param {PersonaData} persona1 - The first persona
-     * @param {PersonaData} persona2 - The second persona
-     * @returns {PersonaData|null} the result persona if persona1 + persona2 is a special formula, null otherwise
+     * @param persona1 The first persona
+     * @param persona2 The second persona
+     * @returns {boolean} the result persona if persona1 + persona2 is a special formula, false otherwise
      */
     getSpecialFuseResult(persona1, persona2) {
         for (let x = 0; x < special2Combos.length; x++) {
@@ -96,9 +87,9 @@ class FusionCalculator {
 
     /**
      * Fuse 2 persona. Doesn't handle rare fusion and special fusion.
-     * @param {PersonaData} persona1 - First persona to fuse
-     * @param {PersonaData} persona2 - Second persona to fuse
-     * @returns {PersonaData|null} The result persona, or null when the fusion is not possible,
+     * @param persona1 First persona to fuse
+     * @param persona2 Second persona to fuse
+     * @returns The result persona, or null when the fusion is not possible,
      * the fusion is a rare fusion, or the fusion is a special fusion.
      */
     fuseNormal(persona1, persona2) {
@@ -151,9 +142,9 @@ class FusionCalculator {
 
     /**
      * Fuse a rare persona with a normal persona.
-     * @param {PersonaData} rarePersona - The rare persona
-     * @param {PersonaData} mainPersona - The normal persona
-     * @returns {PersonaData|null} The result persona, or null when the fusion is not possible.
+     * @param rarePersona The rare persona
+     * @param mainPersona The normal persona
+     * @returns The result persona, or null when the fusion is not possible.
      */
     fuseRare(rarePersona, mainPersona) {
         let modifier = rareCombos[mainPersona.arcana][rarePersonae.indexOf(rarePersona.name)];
@@ -180,8 +171,8 @@ class FusionCalculator {
 
     /**
      * Get the recipe for a special persona
-     * @param {PersonaData} persona - The special persona
-     * @returns {Recipe[]} An array of 1 element containing the recipe for the persona
+     * @param persona The special persona
+     * @returns {Array} An array of 1 element containing the recipe for the persona
      */
     getSpecialRecipe(persona) {
         if (!persona.special) {
@@ -206,8 +197,8 @@ class FusionCalculator {
 
     /**
      * Get the list of all recipes for the given persona
-     * @param {PersonaData} persona - The resulting persona
-     * @returns {Recipe[]} List of all recipes for the given persona
+     * @param persona The resulting persona
+     * @returns {Array} List of all recipes for the given persona
      */
     getRecipes(persona) {
         let allRecipe = [];
@@ -236,8 +227,8 @@ class FusionCalculator {
      * Return true if the given recipe is good for the expected result.
      * A recipe is good if the sources are different from the expected result,
      * and the actual result is the same as the expected result.
-     * @param {Recipe} recipe - The recipe to check
-     * @param {PersonaData} expectedResult - The expected resulting persona
+     * @param recipe The recipe to check
+     * @param expectedResult The expected resulting persona
      * @returns {boolean} true if the recipe is good for the given persona, false otherwise
      */
     isGoodRecipe(recipe, expectedResult) {
@@ -248,8 +239,8 @@ class FusionCalculator {
 
     /**
      * Get all recipes that result in a persona in the given arcana
-     * @param {string} arcana - The result arcana
-     * @returns {Recipe[]} the list of recipes
+     * @param arcana The result arcana
+     * @returns {Array} the list of recipes
      */
     getArcanaRecipes(arcana) {
         let recipes = [];
@@ -300,9 +291,9 @@ class FusionCalculator {
     /**
      * Add a recipe to a list of recipe. Before adding, add an estimated cost
      * to the recipe and sort the recipe's sources.
-     * @param {Recipe} recipe - The recipe to add
-     * @param {Recipe[]} allRecipes - List of recipes to add to
-     * @param {boolean} sortIngredients - if true the ingredient list will be sorted
+     * @param recipe The recipe to add
+     * @param allRecipes List of recipes to add to
+     * @param sortIngredients if true the ingredient list will be sorted
      */
     addRecipe(recipe, allRecipes, sortIngredients) {
         // add an approximated cost
@@ -323,11 +314,6 @@ class FusionCalculator {
         allRecipes.push(recipe);
     }
 
-    /**
-     * Calculate approximate fusion cost
-     * @param {Recipe} recipe - The recipe to calculate cost for
-     * @returns {number} Estimated cost in yen
-     */
     getApproxCost(recipe) {
         let cost = 0;
         for (let i = 0, source = null; source = recipe.sources[i]; i++) {

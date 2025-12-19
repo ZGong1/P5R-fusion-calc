@@ -12,6 +12,9 @@ import FusionCalculator from '../fusion-calculator-core/FusionCalculator';
  * - Memory ranges: 0x4000-0x5FFF or 0x6000-0x9FFF
  * - Last nibble of address must be 0
  * - Skips blank entries (0x00 0x00)
+ *
+ * @param {Object} buffer - The decrypted save file buffer
+ * @returns {Array} Array of persona objects with {address, uid, name}
  */
 export function extractPersonas(buffer) {
   const results = [];

@@ -2,12 +2,6 @@ import { personaMap } from './data/PersonaDataRoyal.js';
 import { arcana2Combos, specialCombos } from './data/Data5Royal.js';
 
 /**
- * @typedef {import('../types').PersonaData} PersonaData
- * @typedef {import('../types').PersonaMap} PersonaMap
- * @typedef {import('../types').PersonaeByArcana} PersonaeByArcana
- */
-
-/**
  * Minimal DataUtil for fusion calculations
  * Contains only the essential utilities needed for the FusionCalculator
  */
@@ -15,7 +9,6 @@ import { arcana2Combos, specialCombos } from './data/Data5Royal.js';
 /**
  * List of all personas (customize based on your needs, e.g., filter DLC)
  * For standalone usage, you may want to modify this to include/exclude certain personas
- * @type {PersonaData[]}
  */
 const customPersonaList = (() => {
     let arr = [];
@@ -32,7 +25,6 @@ const customPersonaList = (() => {
 
 /**
  * Persona organized by arcana for efficient fusion calculations
- * @type {PersonaeByArcana}
  */
 const customPersonaeByArcana = (() => {
     let personaeByArcana_ = {};
@@ -59,7 +51,6 @@ const customPersonaeByArcana = (() => {
 
 /**
  * Map for quick arcana fusion lookups
- * @type {Object.<string, Object.<string, string>>}
  */
 const arcanaMap = (() => {
     let map = {};
@@ -76,9 +67,6 @@ const arcanaMap = (() => {
 
 /**
  * Get the resulting arcana from fusing two arcanas
- * @param {string} arcana1 - First arcana
- * @param {string} arcana2 - Second arcana
- * @returns {string|undefined} Resulting arcana name
  */
 const getResultArcana = (arcana1, arcana2) => {
     return arcanaMap[arcana1][arcana2];
@@ -86,7 +74,6 @@ const getResultArcana = (arcana1, arcana2) => {
 
 /**
  * Special 2-persona fusion combos (extracted from specialCombos)
- * @type {import('../types').SpecialCombo[]}
  */
 const special2Combos = (() => {
     let combos = [];
