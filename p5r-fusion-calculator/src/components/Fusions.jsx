@@ -26,40 +26,69 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
 
   return (
     <div className='fusion-calculator'>
-      Please select which Persona you would like to fuse:
-      <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={setSelectedFusion}/> <br/>
+      <div className='fusion-header'>
+        <p>Please select which Persona you would like to fuse:</p>
+        <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={setSelectedFusion}/>
+      </div>
 
-      {/* {console.log("gottenRecipes: ", gottenRecipes)} */}
-      {gottenRecipes ? gottenRecipes?.length + " recipes were found" : ""}
+      {/* Recipe count */}
+      {gottenRecipes && gottenRecipes.length > 0 && (
+        <div className='recipe-count'>
+          {gottenRecipes.length} recipe{gottenRecipes.length !== 1 ? 's' : ''} found
+        </div>
+      )}
 
-      {(personas.length === 0) && "You must upload a save file to fully utilize this app!"}
+      {/* Warning/info messages */}
+      {personas.length === 0 && (
+        <div className='info-message'>
+          You must upload a save file to fully utilize this app!
+        </div>
+      )}
 
-      {isFound && `You already own ${selectedFusion}`}
+      {isFound && (
+        <div className='success-message'>
+          You already own {selectedFusion}
+        </div>
+      )}
 
-      {targetWithInfo?.rare && "Treasure demons can't be fused!"}
+      {targetWithInfo?.rare && (
+        <div className='warning-message'>
+          Treasure demons can't be fused!
+        </div>
+      )}
 
-      <h3>Legend:</h3>
-      <p>Green means its a persona you already own</p>
-      <p>Yellow means its a persona you can directly fuse</p>
-      <p>⚠️ means it's either a treasure demon, or DLC <small>(hover for details)</small></p>
+      {/* Legend section */}
+      {selectedFusion && (
+        <>
+          <h3>Legend:</h3>
+          <p>Green means it's a persona you already own <br/>
+          Yellow means it's a persona you can directly fuse <br/>
+          ⚠️ means it's either a treasure demon or DLC <small>(hover for details)</small></p>
+        </>
+      )}
 
-
-      {/* Loop through list of recipes for `selectedFusion` */}
-      {gottenRecipes?.map( (recipe, index) => (<div key={index} className='recipe-wrapper'>
-
-        {/* Map instead of just show 2 to handle special fusions that involve more than 2 soners */}
-        {recipe.sources.map( persona => (
-          <SmallPersona
-            key={persona.name}
-            name={persona.name}
-            personas={personas}
-            fusableImmediate={fusableImmediate}
-            onClick={() => setSelectedFusion(persona.name)}/>
-        ))}
-
-      </div>))}
-
-
+      {/* Recipe list */}
+      {gottenRecipes && gottenRecipes.length > 0 && (
+        <div className='recipes-list'>
+          {gottenRecipes.map((recipe, index) => (
+            <div key={index} className='recipe-wrapper'>
+              {recipe.sources.map((persona, personaIndex) => (
+                <span key={persona.name} style={{ display: 'contents' }}>
+                  <SmallPersona
+                    name={persona.name}
+                    personas={personas}
+                    fusableImmediate={fusableImmediate}
+                    onClick={() => setSelectedFusion(persona.name)}
+                  />
+                  {personaIndex < recipe.sources.length - 1 && (
+                    <span className='fusion-separator'>+</span>
+                  )}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 
