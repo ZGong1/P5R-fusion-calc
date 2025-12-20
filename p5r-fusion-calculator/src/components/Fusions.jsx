@@ -11,6 +11,7 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
   // only persona name is passed; get full object with all persona data
+  // TODO: pass this into SmallPersona because it is useful there as well
   const targetWithInfo = selectedFusion 
     ? customPersonaList.find( persona => persona.name === selectedFusion ) 
     : null
@@ -32,6 +33,14 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
       {/* {gottenRecipes ? gottenRecipes?.length + " recipes were found" : ""} */}
 
       {isFound && `You already own ${selectedFusion}`}
+
+      {targetWithInfo?.rare && "Treasure demons can't be fused!"}
+
+      <h3>Legend:</h3>
+      <p>Green means its a persona you already own</p>
+      <p>Yellow means its a persona you can directly fuse</p>
+      <p>⚠️ means it's either a treasure demon, or DLC <small>(hover for details)</small></p>
+
 
       {/* Loop through list of recipes for `selectedFusion` */}
       {gottenRecipes?.map( (recipe, index) => (<div key={index} className='recipe-wrapper'>
