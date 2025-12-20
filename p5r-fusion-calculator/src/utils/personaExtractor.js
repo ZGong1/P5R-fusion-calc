@@ -197,10 +197,10 @@ export function saveFusableToLocalStorage(ownedPersonas) {
 
     if (isFusable) {
       fusablePersonas.push(personaName)
-      console.log(`${personaName} - CAN fuse with current inventory`)
+      // console.log(`${personaName} - CAN fuse with current inventory`)
     } else {
       notFusablePersonas.push(personaName)
-      console.log(`${personaName} - Cannot fuse yet`)
+      // console.log(`${personaName} - Cannot fuse yet`)
     }
   })
 
