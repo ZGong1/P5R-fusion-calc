@@ -1,6 +1,6 @@
 import './SmallPersona.css'
 
-function SmallPersona( { name, personas, fusableImmediate } ) {
+function SmallPersona( { name, personas, fusableImmediate, onClick } ) {
 
     // console.log("personas: ", personas)
     const isFound = personas?.find( persona => persona.name === name )
@@ -15,7 +15,7 @@ function SmallPersona( { name, personas, fusableImmediate } ) {
     }
 
     return (
-        <div className={className} key={name}>
+        <div className={className} key={name} onClick={onClick}>
             {name}
         </div>
     )

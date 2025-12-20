@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
