@@ -1,30 +1,25 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
 import AllPersonae from './components/AllPersonae'
+import Fusions from './components/Fusions'
 import {
   extractPersonas,
   getUniquePersonas,
   savePersonasToLocalStorage,
   loadPersonasFromLocalStorage,
-  clearPersonasFromLocalStorage
+  clearLocalStorage,
+  saveFusableToLocalStorage, loadFusableImmediateFromLocalStorage
 } from './utils/personaExtractor'
 import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('saveUpload')
-  const [personas, setPersonas] = useState([])
+  const [personas, setPersonas] = useState(() => loadPersonasFromLocalStorage() || [])
+  const [fusableImmediate, setFusableImmediate] = useState(() => loadFusableImmediateFromLocalStorage() || [])
   const [selectedPersona, setSelectedPersona] = useState("")
-
-  // Load personas from localStorage on mount
-  useEffect(() => {
-    const stored = loadPersonasFromLocalStorage()
-    if (stored && stored.length > 0) {
-      setPersonas(stored)
-      console.log(`Loaded ${stored.length} personas from localStorage`)
-    }
-  }, [])
+  const [selectedFusion, setSelectedFusion] = useState("")
 
   // Handle successful decryption - extract personas and switch to inventory tab
   const handleDecryptSuccess = (decryptedData) => {
@@ -37,13 +32,18 @@ function App() {
 
     setPersonas(uniquePersonas)
     savePersonasToLocalStorage(uniquePersonas)
+    
+    // also save list of directly fusable (has both components to make in compendium) personas
+    // saved to state below, and saved to localStorage in the function that also returns the list
+    const fusableRN = saveFusableToLocalStorage(uniquePersonas)
+    setFusableImmediate(fusableRN)
   }
 
   // Clear persona inventory
   const handleClearInventory = () => {
     if (window.confirm('Are you sure you want to clear your persona inventory?')) {
       setPersonas([])
-      clearPersonasFromLocalStorage()
+      clearLocalStorage()
       console.log('Persona inventory cleared')
     }
   }
@@ -72,6 +72,14 @@ function App() {
             selectedPersona={selectedPersona} 
             setSelectedPersona={setSelectedPersona}/>
         )}
+
+        {activeTab === 'fusion' &&
+          <Fusions
+            selectedFusion={selectedFusion}
+            setSelectedFusion={setSelectedFusion}
+            personas={personas}
+            fusableImmediate={fusableImmediate}/>
+        }
       </div>
     </div>
   )

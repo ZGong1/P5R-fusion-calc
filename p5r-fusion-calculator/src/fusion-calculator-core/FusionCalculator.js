@@ -22,7 +22,7 @@ class FusionCalculator {
      * Fuse 2 persona. This can handle normal fusion, rare fusion or special fusion.
      * @param persona1 First persona to fuse
      * @param persona2 Second persona to fuse
-     * @returns {PersonaData} The result persona, or null if the fusion is not possible
+     * @returns {Object} The result persona, or null if the fusion is not possible
      */
     fuse(persona1, persona2) {
         // check if this is on the special fusion list, return result immediately
@@ -47,7 +47,7 @@ class FusionCalculator {
     /**
      * Get all 2-fusion recipes with the given persona as one of the ingredients
      * @param persona The persona to fuse from
-     * @returns {Recipe[]} The list of recipes. In each recipe's sources, the given persona
+     * @returns {Array} The list of recipes. In each recipe's sources, the given persona
      * is guaranteed to be the first one.
      */
     getAllResultingRecipesFrom(persona) {

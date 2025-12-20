@@ -1,0 +1,60 @@
+/* Base persona chip styling */
+.small-persona {
+    position: relative;
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.small-persona:hover {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Green - persona already owned */
+.small-persona.green {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.small-persona.green:hover {
+    background: #28a745;
+    color: white;
+    border-color: #28a745;
+}
+
+/* Yellow/Orange - directly fusable */
+.small-persona.fusable {
+    background: #fff3cd;
+    border-color: #ffc107;
+    color: #856404;
+}
+
+.small-persona.fusable:hover {
+    background: #ffc107;
+    color: white;
+    border-color: #ffc107;
+}
+
+/* If both green and fusable, green takes priority in the current implementation */
+.small-persona.green.fusable {
+    background: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.small-persona.green.fusable:hover {
+    background: #28a745;
+    color: white;
+}

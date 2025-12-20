@@ -68,6 +68,7 @@ function HexViewer({ data, logs }) {
                 </div>
             )}
 
+            <strong>Hex dump of your decrypted save file:</strong>
             <div className="hex-viewer">
                 {Array.from({ length: displayRows }, (_, i) => renderRow(i))}
                 {displayRows < totalRows && (
