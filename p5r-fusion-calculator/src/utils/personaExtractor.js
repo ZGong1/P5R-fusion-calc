@@ -121,10 +121,11 @@ export function loadFusableImmediateFromLocalStorage() {
 /**
  * Clears persona inventory from localStorage
  */
-export function clearPersonasFromLocalStorage() {
+export function clearLocalStorage() {
   try {
     localStorage.removeItem('p5r-persona-inventory');
     localStorage.removeItem('p5r-last-updated');
+    localStorage.removeItem('p5r-fusable-personas')
   } catch (error) {
     console.error('Error clearing localStorage:', error);
   }
@@ -153,10 +154,10 @@ export function getLastUpdateTime() {
  */
 export function fusable(toFuse, ownedPersonas, calculator) {
   const toFuseWithData = personaMap[toFuse]
-  console.log("toFuseWithData: ", toFuseWithData)
+  // console.log("toFuseWithData: ", toFuseWithData)
   const possibleFusions = calculator.getRecipes(toFuseWithData)
 
-  console.log("possibleFusions: ", possibleFusions)
+  // console.log("possibleFusions: ", possibleFusions)
 
   // Create a Set of owned persona names for O(1) lookup
   const ownedSet = new Set(ownedPersonas.map(p => p.name))
@@ -182,6 +183,7 @@ export function saveFusableToLocalStorage(ownedPersonas) {
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
   let fusablePersonas = []
+  // TODO: use this
   let notFusablePersonas = []
 
   // Create a Set of owned persona names for O(1) lookup

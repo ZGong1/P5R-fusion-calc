@@ -9,7 +9,7 @@ import {
   getUniquePersonas,
   savePersonasToLocalStorage,
   loadPersonasFromLocalStorage,
-  clearPersonasFromLocalStorage,
+  clearLocalStorage,
   saveFusableToLocalStorage, loadFusableImmediateFromLocalStorage
 } from './utils/personaExtractor'
 import './App.css'
@@ -43,7 +43,7 @@ function App() {
   const handleClearInventory = () => {
     if (window.confirm('Are you sure you want to clear your persona inventory?')) {
       setPersonas([])
-      clearPersonasFromLocalStorage()
+      clearLocalStorage()
       console.log('Persona inventory cleared')
     }
   }
