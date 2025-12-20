@@ -38,7 +38,12 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
 
         {/* Map instead of just show 2 to handle special fusions that involve more than 2 soners */}
         {recipe.sources.map( persona => (
-          <SmallPersona name={persona.name} personas={personas} fusableImmediate={fusableImmediate}/>
+          <SmallPersona
+            key={persona.name}
+            name={persona.name}
+            personas={personas}
+            fusableImmediate={fusableImmediate}
+            onClick={() => setSelectedFusion(persona.name)}/>
         ))}
 
       </div>))}
