@@ -30,7 +30,9 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
       <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={setSelectedFusion}/> <br/>
 
       {/* {console.log("gottenRecipes: ", gottenRecipes)} */}
-      {/* {gottenRecipes ? gottenRecipes?.length + " recipes were found" : ""} */}
+      {gottenRecipes ? gottenRecipes?.length + " recipes were found" : ""}
+
+      {(personas.length === 0) && "You must upload a save file to fully utilize this app!"}
 
       {isFound && `You already own ${selectedFusion}`}
 
