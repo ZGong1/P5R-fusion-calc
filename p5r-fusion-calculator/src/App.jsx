@@ -16,28 +16,10 @@ import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('saveUpload')
-  // list of actually owned personas by the user
-  const [personas, setPersonas] = useState([])
-  const [fusableImmediate, setFusableImmediate] = useState([])
+  const [personas, setPersonas] = useState(() => loadPersonasFromLocalStorage() || [])
+  const [fusableImmediate, setFusableImmediate] = useState(() => loadFusableImmediateFromLocalStorage() || [])
   const [selectedPersona, setSelectedPersona] = useState("")
   const [selectedFusion, setSelectedFusion] = useState("")
-
-  // Load data from localStorage
-  useEffect(() => {
-    // Load owned personas from local storage if they exist
-    const stored = loadPersonasFromLocalStorage()
-    if (stored && stored.length > 0) {
-      setPersonas(stored)
-      console.log(`Loaded ${stored.length} owned personas from localStorage`)
-    }
-
-    // Load fusable personas from local storage if they exist
-    const storedFusableImmediate = loadFusableImmediateFromLocalStorage()
-    if (stored && stored.length > 0) {
-      setFusableImmediate(storedFusableImmediate)
-      console.log(`Loaded ${stored.length} fusable personas from localStorage`)
-    }
-  }, [])
 
   // Handle successful decryption - extract personas and switch to inventory tab
   const handleDecryptSuccess = (decryptedData) => {
