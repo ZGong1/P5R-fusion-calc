@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
@@ -15,7 +16,9 @@ import {
 import './App.css'
 
 function App() {
-  const [activeTab, setActiveTab] = useState('saveUpload')
+  const location = useLocation()
+  const pathname = location.pathname
+
   const [personas, setPersonas] = useState(() => loadPersonasFromLocalStorage() || [])
   const [fusableImmediate, setFusableImmediate] = useState(() => loadFusableImmediateFromLocalStorage() || [])
   const [selectedPersona, setSelectedPersona] = useState("")
@@ -50,36 +53,33 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar 
-        activeTab={activeTab} 
-        onTabChange={setActiveTab} />
+      <Navbar />
 
       <div className="app-content">
-        {activeTab === 'saveUpload' && (
+        <div style={{ display: pathname === '/' ? 'block' : 'none' }}>
           <FileUpload onDecryptSuccess={handleDecryptSuccess} />
-        )}
+        </div>
 
-        {activeTab === 'inventory' && (
-          <PersonaInventory 
-            personas={personas} 
-            onClear={handleClearInventory} 
-            setActiveTab={setActiveTab}
+        <div style={{ display: pathname === '/inventory' ? 'block' : 'none' }}>
+          <PersonaInventory
+            personas={personas}
+            onClear={handleClearInventory}
             setSelectedPersona={setSelectedPersona}/>
-        )}
+        </div>
 
-        {activeTab === 'allPersonae' && (
-          <AllPersonae 
-            selectedPersona={selectedPersona} 
+        <div style={{ display: pathname === '/all-personas' ? 'block' : 'none' }}>
+          <AllPersonae
+            selectedPersona={selectedPersona}
             setSelectedPersona={setSelectedPersona}/>
-        )}
+        </div>
 
-        {activeTab === 'fusion' &&
+        <div style={{ display: pathname === '/fusion' ? 'block' : 'none' }}>
           <Fusions
             selectedFusion={selectedFusion}
             setSelectedFusion={setSelectedFusion}
             personas={personas}
             fusableImmediate={fusableImmediate}/>
-        }
+        </div>
       </div>
     </div>
   )

@@ -1,12 +1,16 @@
 import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar({ activeTab, onTabChange }) {
+function Navbar() {
+  const location = useLocation();
+  const pathname = location.pathname;
+
   const tabs = [
-    { id: 'saveUpload', label: 'Upload Your Save File' },
-    { id: 'inventory', label: 'My Compendium' },
-    { id: 'allPersonae', label: 'All Personas' },
-    { id: 'fusion', label: 'Fusion Calculator'}
+    { path: '/', label: 'Upload Your Save File' },
+    { path: '/inventory', label: 'My Compendium' },
+    { path: '/all-personas', label: 'All Personas' },
+    { path: '/fusion', label: 'Fusion Calculator'}
   ];
 
   return (
@@ -15,13 +19,13 @@ function Navbar({ activeTab, onTabChange }) {
         <h1 className="navbar-title">P5R Save Tool</h1>
         <div className="navbar-tabs">
           {tabs.map(tab => (
-            <button
-              key={tab.id}
-              className={`navbar-tab ${activeTab === tab.id ? 'active' : ''}`}
-              onClick={() => onTabChange(tab.id)}
+            <Link
+              key={tab.path}
+              to={tab.path}
+              className={`navbar-tab ${pathname === tab.path ? 'active' : ''}`}
             >
               {tab.label}
-            </button>
+            </Link>
           ))}
         </div>
       </div>

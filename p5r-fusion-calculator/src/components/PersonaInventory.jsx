@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { personaMap } from '../fusion-calculator-core/data/PersonaDataRoyal.js';
 import './PersonaInventory.css';
 
-function PersonaInventory({ personas, onClear, setActiveTab, setSelectedPersona }) {
+function PersonaInventory({ personas, onClear, setSelectedPersona }) {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name'); // 'name', 'level', 'arcana'
   const [filterArcana, setFilterArcana] = useState('all');
@@ -105,7 +107,7 @@ function PersonaInventory({ personas, onClear, setActiveTab, setSelectedPersona 
           return (
             <div key={`${persona.uid}-${index}`} className="persona-card" onClick={ () => {
               setSelectedPersona(persona.name)
-              setActiveTab("allPersonae")
+              navigate("/all-personas")
             }}>
               <div className="persona-card-header">
                 <h3 className="persona-name">{persona.name}</h3>
