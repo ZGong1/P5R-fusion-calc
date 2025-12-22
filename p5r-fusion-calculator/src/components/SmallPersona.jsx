@@ -1,7 +1,9 @@
 import './SmallPersona.css'
 import {personaMap} from "../fusion-calculator-core/FusionCalculator.js";
+import { useNavigate } from 'react-router-dom';
 
 function SmallPersona( { name, personas, fusableImmediate, onClick } ) {
+    const navigate = useNavigate();
 
     const personaWithInfo = personaMap[name]
 
@@ -29,10 +31,23 @@ function SmallPersona( { name, personas, fusableImmediate, onClick } ) {
         title = "This is a DLC Persona"
     }
 
+    // Handle info icon click - navigate to All Personas page
+    const handleInfoClick = (e) => {
+        e.stopPropagation(); // Prevent triggering the main onClick
+        navigate(`/all-personas?selected=${encodeURIComponent(name)}`);
+    };
+
     return (
         <div className={className} key={name} onClick={onClick} title={title}>
             { (isRare || isDLC) && "⚠️"}
             {name}
+            <span
+                className="persona-info-icon"
+                onClick={handleInfoClick}
+                title="View detailed info"
+            >
+                ℹ️
+            </span>
         </div>
     )
 
