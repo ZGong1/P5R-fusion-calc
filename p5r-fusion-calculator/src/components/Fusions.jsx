@@ -3,7 +3,7 @@ import CompendiumSelector from './CompendiumSelector'
 import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
 import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil';
 import SmallPersona from './SmallPersona';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import './Fusions.css'
 
 
@@ -12,11 +12,53 @@ function Fusions({ personas, fusableImmediate }) {
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedFusion = searchParams.get('selected') || ''
 
-  // Filter state variables
-  const [hideRare, setHideRare] = useState(false)
-  const [hideDLC, setHideDLC] = useState(false)
-  const [hideNonOwned, setHideNonOwned] = useState(false)
-  const [showMixedOnly, setShowMixedOnly] = useState(false)
+  // Initialize selected persona from localStorage on mount if URL is empty
+  useEffect(() => {
+    if (!selectedFusion) {
+      const lastSelected = localStorage.getItem('p5r-last-selected-fusion')
+      if (lastSelected) {
+        setSearchParams({ selected: lastSelected })
+      }
+    }
+  }, []) // Only run on mount
+
+  // Sync selected fusion to localStorage whenever it changes
+  useEffect(() => {
+    if (selectedFusion) {
+      localStorage.setItem('p5r-last-selected-fusion', selectedFusion)
+    }
+  }, [selectedFusion])
+
+  // Filter state variables - initialize from localStorage
+  const [hideRare, setHideRare] = useState(
+    () => localStorage.getItem('p5r-fusion-hideRare') === 'true'
+  )
+  const [hideDLC, setHideDLC] = useState(
+    () => localStorage.getItem('p5r-fusion-hideDLC') === 'true'
+  )
+  const [hideNonOwned, setHideNonOwned] = useState(
+    () => localStorage.getItem('p5r-fusion-hideNonOwned') === 'true'
+  )
+  const [showMixedOnly, setShowMixedOnly] = useState(
+    () => localStorage.getItem('p5r-fusion-showMixedOnly') === 'true'
+  )
+
+  // Sync filters to localStorage
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-hideRare', hideRare.toString())
+  }, [hideRare])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-hideDLC', hideDLC.toString())
+  }, [hideDLC])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-hideNonOwned', hideNonOwned.toString())
+  }, [hideNonOwned])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-showMixedOnly', showMixedOnly.toString())
+  }, [showMixedOnly])
 
   const handleSelectFusion = (name) => {
     if (name) {
