@@ -1,13 +1,15 @@
 import { useSearchParams } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import { usePersonas } from '../contexts/PersonaContext'
 import CompendiumSelector from './CompendiumSelector'
 import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
-import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil';
-import SmallPersona from './SmallPersona';
-import {useState, useEffect} from "react";
+import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil'
+import SmallPersona from './SmallPersona'
 import './Fusions.css'
 
 
-function Fusions({ personas, fusableImmediate }) {
+function Fusions() {
+  const { personas, fusableImmediate } = usePersonas()
   // Get selected fusion from URL parameters
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedFusion = searchParams.get('selected') || ''

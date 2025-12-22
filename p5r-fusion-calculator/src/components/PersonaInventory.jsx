@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { usePersonas } from '../contexts/PersonaContext';
 import { personaMap } from '../fusion-calculator-core/data/PersonaDataRoyal.js';
 import './PersonaInventory.css';
 
-function PersonaInventory({ personas, onClear }) {
+function PersonaInventory() {
+  const { personas, handleClearInventory } = usePersonas();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name'); // 'name', 'level', 'arcana'
@@ -59,7 +61,7 @@ function PersonaInventory({ personas, onClear }) {
     <div className="persona-inventory">
       <div className="inventory-header">
         <h2>Persona Inventory ({personas.length} total)</h2>
-        <button className="clear-button" onClick={onClear}>
+        <button className="clear-button" onClick={handleClearInventory}>
           Clear Inventory
         </button>
       </div>

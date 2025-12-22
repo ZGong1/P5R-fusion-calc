@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { decryptSaveFile } from '../utils/decrypt';
+import { usePersonas } from '../contexts/PersonaContext';
 import HexViewer from './HexViewer';
 import './FileUpload.css';
 
-function FileUpload({ onDecryptSuccess }) {
+function FileUpload() {
+    const { handleDecryptSuccess } = usePersonas();
     const [decryptedData, setDecryptedData] = useState(null);
     const [logs, setLogs] = useState([]);
     const [error, setError] = useState(null);
@@ -35,7 +37,7 @@ function FileUpload({ onDecryptSuccess }) {
                 setLogs(result.logs);
 
                 // Call the success callback to extract personas
-                onDecryptSuccess(result.data);
+                handleDecryptSuccess(result.data);
             } else {
                 console.error('Decryption failed:', result.error);
                 setError(result.error);
