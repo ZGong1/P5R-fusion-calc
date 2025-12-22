@@ -1,22 +1,67 @@
 import { useSearchParams } from 'react-router-dom'
+import { useState, useEffect, useMemo } from "react"
+import { usePersonas } from '../contexts/PersonaContext'
+import { applyFusionFilters } from '../utils/fusionFilters'
 import CompendiumSelector from './CompendiumSelector'
 import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
-import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil';
-import SmallPersona from './SmallPersona';
-import {useState} from "react";
+import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil'
+import SmallPersona from './SmallPersona'
 import './Fusions.css'
 
 
-function Fusions({ personas, fusableImmediate }) {
+function Fusions() {
+  const { personas, fusableImmediate } = usePersonas()
   // Get selected fusion from URL parameters
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedFusion = searchParams.get('selected') || ''
 
-  // Filter state variables
-  const [hideRare, setHideRare] = useState(false)
-  const [hideDLC, setHideDLC] = useState(false)
-  const [hideNonOwned, setHideNonOwned] = useState(false)
-  const [showMixedOnly, setShowMixedOnly] = useState(false)
+  // Initialize selected persona from localStorage on mount if URL is empty
+  useEffect(() => {
+    if (!selectedFusion) {
+      const lastSelected = localStorage.getItem('p5r-last-selected-fusion')
+      if (lastSelected) {
+        setSearchParams({ selected: lastSelected }, { replace: true })
+      }
+    }
+  }, []) // Only run on mount
+
+  // Sync selected fusion to localStorage whenever it changes
+  useEffect(() => {
+    if (selectedFusion) {
+      localStorage.setItem('p5r-last-selected-fusion', selectedFusion)
+    }
+  }, [selectedFusion])
+
+  // Filter state variables - initialize from localStorage
+  const [hideRare, setHideRare] = useState(
+    () => localStorage.getItem('p5r-fusion-hideRare') === 'true'
+  )
+  const [hideDLC, setHideDLC] = useState(
+    () => localStorage.getItem('p5r-fusion-hideDLC') === 'true'
+  )
+  const [hideNonOwned, setHideNonOwned] = useState(
+    () => localStorage.getItem('p5r-fusion-hideNonOwned') === 'true'
+  )
+  const [showMixedOnly, setShowMixedOnly] = useState(
+    () => localStorage.getItem('p5r-fusion-showMixedOnly') === 'true'
+  )
+
+  // Sync filters to localStorage
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-hideRare', hideRare.toString())
+  }, [hideRare])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-hideDLC', hideDLC.toString())
+  }, [hideDLC])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-hideNonOwned', hideNonOwned.toString())
+  }, [hideNonOwned])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-showMixedOnly', showMixedOnly.toString())
+  }, [showMixedOnly])
 
   const handleSelectFusion = (name) => {
     if (name) {
@@ -38,43 +83,19 @@ function Fusions({ personas, fusableImmediate }) {
   // TODO: pass into SmallPersona because it is useful here as well
   const isFound = personas?.find( persona => persona.name === selectedFusion )
 
-  let gottenRecipes = selectedFusion
+  const rawRecipes = selectedFusion
     ? calculator.getRecipes(targetWithInfo)
     : null
 
-  // filter rares
-  if (gottenRecipes && hideRare) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return !recipe.sources.some(source => source.rare)
-    })
-  }
-  
-  // filter DLC
-  if (gottenRecipes && hideDLC) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return !recipe.sources.some(source => source.dlc)
-    })
-  }
-
-  // filter recipes with non-owned personas
-  if (gottenRecipes && hideNonOwned) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return recipe.sources.every(source =>
-        personas?.find(persona => persona.name === source.name)
-      )
-    })
-  }
-
-  // filter to show only recipes where all components are owned or fusable
-  if (gottenRecipes && showMixedOnly) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return recipe.sources.every(source => {
-        const isOwned = personas?.find(persona => persona.name === source.name)
-        const isFusable = fusableImmediate?.find(persona => persona === source.name)
-        return isOwned || isFusable
-      })
-    })
-  }
+  // Apply filters using util function with memoization
+  const gottenRecipes = useMemo(() => {
+    return applyFusionFilters(
+      rawRecipes,
+      { hideRare, hideDLC, hideNonOwned, showMixedOnly },
+      personas,
+      fusableImmediate
+    )
+  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, personas, fusableImmediate])
 
   return (
     <div className='fusion-calculator'>
