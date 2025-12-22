@@ -17,7 +17,7 @@ function Fusions({ personas, fusableImmediate }) {
     if (!selectedFusion) {
       const lastSelected = localStorage.getItem('p5r-last-selected-fusion')
       if (lastSelected) {
-        setSearchParams({ selected: lastSelected })
+        setSearchParams({ selected: lastSelected }, { replace: true })
       }
     }
   }, []) // Only run on mount

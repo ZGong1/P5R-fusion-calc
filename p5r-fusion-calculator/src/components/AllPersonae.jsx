@@ -14,7 +14,7 @@ function AllPersonae () {
         if (!selectedPersona) {
             const lastSelected = localStorage.getItem('p5r-last-selected-persona');
             if (lastSelected) {
-                setSearchParams({ selected: lastSelected });
+                setSearchParams({ selected: lastSelected }, { replace: true });
             }
         }
     }, []); // Only run on mount
