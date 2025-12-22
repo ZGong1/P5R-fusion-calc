@@ -58,3 +58,15 @@
     background: #28a745;
     color: white;
 }
+
+/* Info icon - simple inline styling like the warning icon */
+.persona-info-icon {
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 0.4rem;
+    transition: transform 0.2s ease;
+}
+
+.persona-info-icon:hover {
+    transform: scale(1.2);
+}
