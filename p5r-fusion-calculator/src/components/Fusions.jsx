@@ -1,6 +1,7 @@
 import { useSearchParams } from 'react-router-dom'
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { usePersonas } from '../contexts/PersonaContext'
+import { applyFusionFilters } from '../utils/fusionFilters'
 import CompendiumSelector from './CompendiumSelector'
 import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
 import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil'
@@ -82,43 +83,19 @@ function Fusions() {
   // TODO: pass into SmallPersona because it is useful here as well
   const isFound = personas?.find( persona => persona.name === selectedFusion )
 
-  let gottenRecipes = selectedFusion
+  const rawRecipes = selectedFusion
     ? calculator.getRecipes(targetWithInfo)
     : null
 
-  // filter rares
-  if (gottenRecipes && hideRare) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return !recipe.sources.some(source => source.rare)
-    })
-  }
-  
-  // filter DLC
-  if (gottenRecipes && hideDLC) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return !recipe.sources.some(source => source.dlc)
-    })
-  }
-
-  // filter recipes with non-owned personas
-  if (gottenRecipes && hideNonOwned) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return recipe.sources.every(source =>
-        personas?.find(persona => persona.name === source.name)
-      )
-    })
-  }
-
-  // filter to show only recipes where all components are owned or fusable
-  if (gottenRecipes && showMixedOnly) {
-    gottenRecipes = gottenRecipes.filter(recipe => {
-      return recipe.sources.every(source => {
-        const isOwned = personas?.find(persona => persona.name === source.name)
-        const isFusable = fusableImmediate?.find(persona => persona === source.name)
-        return isOwned || isFusable
-      })
-    })
-  }
+  // Apply filters using util function with memoization
+  const gottenRecipes = useMemo(() => {
+    return applyFusionFilters(
+      rawRecipes,
+      { hideRare, hideDLC, hideNonOwned, showMixedOnly },
+      personas,
+      fusableImmediate
+    )
+  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, personas, fusableImmediate])
 
   return (
     <div className='fusion-calculator'>
