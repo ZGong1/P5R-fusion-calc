@@ -19,12 +19,14 @@ function App() {
   const location = useLocation()
   const pathname = location.pathname
 
+  // TODO: put these into a context provider so they don't need to be
+  // drilled or passed through so many levels of components
   const [personas, setPersonas] = useState(() => loadPersonasFromLocalStorage() || [])
   const [fusableImmediate, setFusableImmediate] = useState(() => loadFusableImmediateFromLocalStorage() || [])
-  const [selectedPersona, setSelectedPersona] = useState("")
-  const [selectedFusion, setSelectedFusion] = useState("")
 
   // Handle successful decryption - extract personas and switch to inventory tab
+  // TODO: Could this be in a util file and just be imported where needed
+  // to keep App.jsx cleaner?
   const handleDecryptSuccess = (decryptedData) => {
     console.log('Decryption successful, extracting personas...')
     const extractedPersonas = extractPersonas(decryptedData)
@@ -43,6 +45,8 @@ function App() {
   }
 
   // Clear persona inventory
+  // TODO: Could this be in a util file and just be imported where needed
+  // to keep App.jsx cleaner?
   const handleClearInventory = () => {
     if (window.confirm('Are you sure you want to clear your persona inventory?')) {
       setPersonas([])
@@ -63,20 +67,15 @@ function App() {
         <div style={{ display: pathname === '/inventory' ? 'block' : 'none' }}>
           <PersonaInventory
             personas={personas}
-            onClear={handleClearInventory}
-            setSelectedPersona={setSelectedPersona}/>
+            onClear={handleClearInventory}/>
         </div>
 
         <div style={{ display: pathname === '/all-personas' ? 'block' : 'none' }}>
-          <AllPersonae
-            selectedPersona={selectedPersona}
-            setSelectedPersona={setSelectedPersona}/>
+          <AllPersonae />
         </div>
 
         <div style={{ display: pathname === '/fusion' ? 'block' : 'none' }}>
           <Fusions
-            selectedFusion={selectedFusion}
-            setSelectedFusion={setSelectedFusion}
             personas={personas}
             fusableImmediate={fusableImmediate}/>
         </div>

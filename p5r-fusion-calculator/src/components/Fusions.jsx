@@ -1,11 +1,22 @@
+import { useSearchParams } from 'react-router-dom'
 import CompendiumSelector from './CompendiumSelector'
 import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
 import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil';
-import './Fusions.css'
 import SmallPersona from './SmallPersona';
+import './Fusions.css'
 
 
-function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate }) {
+function Fusions({ personas, fusableImmediate }) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const selectedFusion = searchParams.get('selected') || ''
+
+  const handleSelectFusion = (name) => {
+    if (name) {
+      setSearchParams({ selected: name })
+    } else {
+      setSearchParams({})
+    }
+  }
 
   // initialize fusion calculator engine for fusion calculations
   const calculator = new FusionCalculator(customPersonaeByArcana)
@@ -28,7 +39,7 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
     <div className='fusion-calculator'>
       <div className='fusion-header'>
         <p>Please select which Persona you would like to fuse:</p>
-        <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={setSelectedFusion}/>
+        <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={handleSelectFusion}/>
       </div>
 
       {/* Recipe count */}
@@ -78,7 +89,7 @@ function Fusions({ selectedFusion, setSelectedFusion, personas, fusableImmediate
                     name={persona.name}
                     personas={personas}
                     fusableImmediate={fusableImmediate}
-                    onClick={() => setSelectedFusion(persona.name)}
+                    onClick={() => handleSelectFusion(persona.name)}
                   />
                   {personaIndex < recipe.sources.length - 1 && (
                     <span className='fusion-separator'>+</span>

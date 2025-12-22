@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { personaMap } from '../fusion-calculator-core/data/PersonaDataRoyal.js';
 import './PersonaInventory.css';
 
-function PersonaInventory({ personas, onClear, setSelectedPersona }) {
+function PersonaInventory({ personas, onClear }) {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name'); // 'name', 'level', 'arcana'
@@ -106,8 +106,7 @@ function PersonaInventory({ personas, onClear, setSelectedPersona }) {
 
           return (
             <div key={`${persona.uid}-${index}`} className="persona-card" onClick={ () => {
-              setSelectedPersona(persona.name)
-              navigate("/all-personas")
+              navigate(`/all-personas?selected=${encodeURIComponent(persona.name)}`)
             }}>
               <div className="persona-card-header">
                 <h3 className="persona-name">{persona.name}</h3>
