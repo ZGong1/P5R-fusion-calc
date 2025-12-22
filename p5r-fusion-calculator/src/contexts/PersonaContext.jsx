@@ -1,13 +1,17 @@
 import { createContext, useContext, useState } from 'react'
+
 import {
   extractPersonas,
-  getUniquePersonas,
+  getUniquePersonas
+} from '../utils/personaExtractor'
+
+import {
   savePersonasToLocalStorage,
   loadPersonasFromLocalStorage,
   clearLocalStorage,
   saveFusableToLocalStorage,
   loadFusableImmediateFromLocalStorage
-} from '../utils/personaExtractor'
+} from '../utils/storage'
 
 const PersonaContext = createContext(null)
 
