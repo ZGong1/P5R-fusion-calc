@@ -75,12 +75,10 @@ function Fusions() {
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
   // only persona name is passed; get full object with all persona data
-  // TODO: pass this into SmallPersona because it is useful there as well
-  const targetWithInfo = selectedFusion 
-    ? customPersonaList.find( persona => persona.name === selectedFusion ) 
+  const targetWithInfo = selectedFusion
+    ? customPersonaList.find( persona => persona.name === selectedFusion )
     : null
 
-  // TODO: pass into SmallPersona because it is useful here as well
   const isFound = personas?.find( persona => persona.name === selectedFusion )
 
   const rawRecipes = selectedFusion
@@ -199,7 +197,7 @@ function Fusions() {
               {recipe.sources.map((persona, personaIndex) => (
                 <span key={persona.name} style={{ display: 'contents' }}>
                   <SmallPersona
-                    name={persona.name}
+                    persona={persona}
                     personas={personas}
                     fusableImmediate={fusableImmediate}
                     onClick={() => handleSelectFusion(persona.name)}
