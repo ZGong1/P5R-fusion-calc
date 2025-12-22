@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
@@ -16,8 +16,6 @@ import {
 import './App.css'
 
 function App() {
-  const location = useLocation()
-  const pathname = location.pathname
 
   // TODO: put these into a context provider so they don't need to be
   // drilled or passed through so many levels of components
@@ -60,25 +58,12 @@ function App() {
       <Navbar />
 
       <div className="app-content">
-        <div style={{ display: pathname === '/' ? 'block' : 'none' }}>
-          <FileUpload onDecryptSuccess={handleDecryptSuccess} />
-        </div>
-
-        <div style={{ display: pathname === '/inventory' ? 'block' : 'none' }}>
-          <PersonaInventory
-            personas={personas}
-            onClear={handleClearInventory}/>
-        </div>
-
-        <div style={{ display: pathname === '/all-personas' ? 'block' : 'none' }}>
-          <AllPersonae />
-        </div>
-
-        <div style={{ display: pathname === '/fusion' ? 'block' : 'none' }}>
-          <Fusions
-            personas={personas}
-            fusableImmediate={fusableImmediate}/>
-        </div>
+        <Routes>
+          <Route path="/" element={<FileUpload onDecryptSuccess={handleDecryptSuccess} />} />
+          <Route path="/inventory" element={<PersonaInventory personas={personas} onClear={handleClearInventory} />} />
+          <Route path="/all-personas" element={<AllPersonae />} />
+          <Route path="/fusion" element={<Fusions personas={personas} fusableImmediate={fusableImmediate} />} />
+        </Routes>
       </div>
     </div>
   )
