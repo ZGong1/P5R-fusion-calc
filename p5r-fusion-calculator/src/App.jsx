@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import FileUpload from './components/FileUpload'
 import PersonaInventory from './components/PersonaInventory'
@@ -15,13 +16,17 @@ import {
 import './App.css'
 
 function App() {
-  const [activeTab, setActiveTab] = useState('saveUpload')
+  const location = useLocation()
+  const pathname = location.pathname
+
+  // TODO: put these into a context provider so they don't need to be
+  // drilled or passed through so many levels of components
   const [personas, setPersonas] = useState(() => loadPersonasFromLocalStorage() || [])
   const [fusableImmediate, setFusableImmediate] = useState(() => loadFusableImmediateFromLocalStorage() || [])
-  const [selectedPersona, setSelectedPersona] = useState("")
-  const [selectedFusion, setSelectedFusion] = useState("")
 
   // Handle successful decryption - extract personas and switch to inventory tab
+  // TODO: Could this be in a util file and just be imported where needed
+  // to keep App.jsx cleaner?
   const handleDecryptSuccess = (decryptedData) => {
     console.log('Decryption successful, extracting personas...')
     const extractedPersonas = extractPersonas(decryptedData)
@@ -40,6 +45,8 @@ function App() {
   }
 
   // Clear persona inventory
+  // TODO: Could this be in a util file and just be imported where needed
+  // to keep App.jsx cleaner?
   const handleClearInventory = () => {
     if (window.confirm('Are you sure you want to clear your persona inventory?')) {
       setPersonas([])
@@ -50,36 +57,28 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar 
-        activeTab={activeTab} 
-        onTabChange={setActiveTab} />
+      <Navbar />
 
       <div className="app-content">
-        {activeTab === 'saveUpload' && (
+        <div style={{ display: pathname === '/' ? 'block' : 'none' }}>
           <FileUpload onDecryptSuccess={handleDecryptSuccess} />
-        )}
+        </div>
 
-        {activeTab === 'inventory' && (
-          <PersonaInventory 
-            personas={personas} 
-            onClear={handleClearInventory} 
-            setActiveTab={setActiveTab}
-            setSelectedPersona={setSelectedPersona}/>
-        )}
+        <div style={{ display: pathname === '/inventory' ? 'block' : 'none' }}>
+          <PersonaInventory
+            personas={personas}
+            onClear={handleClearInventory}/>
+        </div>
 
-        {activeTab === 'allPersonae' && (
-          <AllPersonae 
-            selectedPersona={selectedPersona} 
-            setSelectedPersona={setSelectedPersona}/>
-        )}
+        <div style={{ display: pathname === '/all-personas' ? 'block' : 'none' }}>
+          <AllPersonae />
+        </div>
 
-        {activeTab === 'fusion' &&
+        <div style={{ display: pathname === '/fusion' ? 'block' : 'none' }}>
           <Fusions
-            selectedFusion={selectedFusion}
-            setSelectedFusion={setSelectedFusion}
             personas={personas}
             fusableImmediate={fusableImmediate}/>
-        }
+        </div>
       </div>
     </div>
   )
