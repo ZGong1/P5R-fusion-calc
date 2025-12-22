@@ -16,7 +16,7 @@ function AllPersonae () {
             if (lastSelected) {
                 setSearchParams({ selected: lastSelected }, { replace: true });
             }
-        }
+        } // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []); // Only run on mount
 
     // Sync selected persona to localStorage whenever it changes
