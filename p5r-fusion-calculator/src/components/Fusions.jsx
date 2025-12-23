@@ -7,6 +7,7 @@ import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
 import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil'
 import SmallPersona from './SmallPersona'
 import './Fusions.css'
+import traits from "../data/traits.js";
 
 const personaNames = customPersonaList.map((persona) => persona.name);
 
@@ -26,7 +27,7 @@ function Fusions() {
       if (lastSelected) {
         setSearchParams({ selected: lastSelected }, { replace: true })
       }
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Only run on mount
 
   // Sync selected fusion to localStorage whenever it changes
@@ -78,13 +79,14 @@ function Fusions() {
   // initialize fusion calculator engine for fusion calculations
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
-  // only persona name is passed; get full object with all persona data
+  // only persona name is held in the URI so find object with all data
   const targetWithInfo = selectedFusion
     ? customPersonaList.find( persona => persona.name === selectedFusion )
     : null
 
   const isFound = personas?.find( persona => persona.name === selectedFusion )
 
+  // Obtain list of recipes, and filter down if options are set
   const rawRecipes = selectedFusion
     ? calculator.getRecipes(targetWithInfo)
     : null
@@ -101,12 +103,12 @@ function Fusions() {
 
   return (
     <div className='fusion-calculator'>
-      {/* Persona selector */}
+      {/* Persona selector and related combobox selectors */}
       <div className='fusion-header'>
         Please select which Persona you would like to fuse: {" "}
-        <CompendiumSelector items={personaNames} selectedItem={selectedFusion} setSelectedItem={handleSelectFusion} ariaLabel="Select persona to fuse"/>
+        <CompendiumSelector items={personaNames} selectedItem={selectedFusion} setSelectedItem={handleSelectFusion} ariaLabel="Select persona to fuse"/> <br/>
         Please select which trait you would like to target: {" "}
-        {/* TODO: Get trait list and wire up CompendiumSelector for trait selection */}
+        <CompendiumSelector items={traits} selectedItem={desiredTrait} setSelectedItem={e => setDesiredTrait(e)} ariaLabel="Select trait to target"/>
       </div>
 
       {/* Filter toggles */}
@@ -191,6 +193,7 @@ function Fusions() {
           <h3>Legend:</h3>
           <p>Green means it's a persona you already own <br/>
           Yellow means it's a persona you can directly fuse <br/>
+          Blue border means it has the targeted trait <br/>
           ⚠️ means it's either a treasure demon or DLC <small>(hover for details)</small></p>
         </>
       )}
@@ -206,6 +209,7 @@ function Fusions() {
                     persona={persona}
                     personas={personas}
                     fusableImmediate={fusableImmediate}
+                    desiredTrait={desiredTrait}
                     onClick={() => handleSelectFusion(persona.name)}
                   />
                   {personaIndex < recipe.sources.length - 1 && (

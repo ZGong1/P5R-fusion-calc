@@ -1,7 +1,7 @@
 import './SmallPersona.css'
 import { useNavigate } from 'react-router-dom';
 
-function SmallPersona( { persona, personas, fusableImmediate, onClick } ) {
+function SmallPersona( { persona, personas, fusableImmediate, desiredTrait, onClick } ) {
     const navigate = useNavigate();
 
     // Persona object now passed directly, no lookup needed
@@ -12,6 +12,7 @@ function SmallPersona( { persona, personas, fusableImmediate, onClick } ) {
     const isFusable = fusableImmediate?.find( p => p === name)
     const isRare = persona.rare
     const isDLC = persona.dlc
+    const hasDesiredTrait = desiredTrait === persona.trait;
 
     // compute class name for colorful results
     let className = "small-persona"
@@ -20,6 +21,9 @@ function SmallPersona( { persona, personas, fusableImmediate, onClick } ) {
     }
     if (isFusable) {
         className += " fusable"
+    }
+    if (hasDesiredTrait) {
+        className += " desired-trait"
     }
 
     // Compute title for tooltips involving DLC/rare personas
