@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 
 import {
-  extractPersonas,
+  extractPersonas, extractSaveMetadata,
   getUniquePersonas
 } from '../utils/personaExtractor'
 
@@ -10,7 +10,7 @@ import {
   loadPersonasFromLocalStorage,
   clearLocalStorage,
   saveFusableToLocalStorage,
-  loadFusableImmediateFromLocalStorage
+  loadFusableImmediateFromLocalStorage, loadMetaDataFromLocalStorage, saveMetaDataToLocalStorage
 } from '../utils/storage'
 
 const PersonaContext = createContext(null)
@@ -18,6 +18,7 @@ const PersonaContext = createContext(null)
 export function PersonaProvider({ children }) {
   const [personas, setPersonas] = useState(() => loadPersonasFromLocalStorage() || [])
   const [fusableImmediate, setFusableImmediate] = useState(() => loadFusableImmediateFromLocalStorage() || [])
+  const [saveMetaData, setSaveMetaData] = useState(() => loadMetaDataFromLocalStorage())
 
   // Handle successful decryption - extract personas and save to state/localStorage
   const handleDecryptSuccess = (decryptedData) => {
@@ -34,6 +35,12 @@ export function PersonaProvider({ children }) {
     // also save list of directly fusable personas
     const fusableRN = saveFusableToLocalStorage(uniquePersonas)
     setFusableImmediate(fusableRN)
+
+    // Save metadata section
+    // const metadata = getSaveMetadata(decryptedData)
+    const saveMetaData = extractSaveMetadata(decryptedData)
+    setSaveMetaData(saveMetaData)
+    saveMetaDataToLocalStorage(saveMetaData)
   }
 
   // Clear persona inventory
@@ -41,6 +48,7 @@ export function PersonaProvider({ children }) {
     if (window.confirm('Are you sure you want to clear your persona inventory?')) {
       setPersonas([])
       setFusableImmediate([])
+      setSaveMetaData({})
       clearLocalStorage()
       console.log('Persona inventory cleared')
     }
@@ -50,6 +58,7 @@ export function PersonaProvider({ children }) {
     <PersonaContext.Provider value={{
       personas,
       fusableImmediate,
+      saveMetaData,
       handleDecryptSuccess,
       handleClearInventory
     }}>

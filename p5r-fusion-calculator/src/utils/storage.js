@@ -123,6 +123,7 @@ export function clearLocalStorage() {
     localStorage.removeItem('p5r-persona-inventory');
     localStorage.removeItem('p5r-last-updated');
     localStorage.removeItem('p5r-fusable-personas')
+    localStorage.removeItem("p5r-save-metadata"    )
   } catch (error) {
     console.error('Error clearing localStorage:', error);
   }
