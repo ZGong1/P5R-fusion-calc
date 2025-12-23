@@ -7,12 +7,14 @@
  * @param {boolean} filters.hideNonOwned - Show only recipes with owned personas
  * @param {boolean} filters.showMixedOnly - Show only recipes with owned or fusable personas
  * @param {boolean} filters.showDesiredTraitOnly - Show only recipes with at least one persona having the desired trait
+ * @param {boolean} filters.showDesiredSkillOnly - Show only recipes with at least one persona having the desired skill
  * @param {Array} personas - User's owned personas
  * @param {Array} fusableImmediate - Directly fusable personas
  * @param {string} desiredTrait - The desired trait to filter by
+ * @param {string} desiredSkill - The desired skill to filter by
  * @returns {Array} Filtered recipes
  */
-export function applyFusionFilters(recipes, filters, personas, fusableImmediate, desiredTrait) {
+export function applyFusionFilters(recipes, filters, personas, fusableImmediate, desiredTrait, desiredSkill) {
   if (!recipes) return null
 
   let filtered = recipes
@@ -55,6 +57,13 @@ export function applyFusionFilters(recipes, filters, personas, fusableImmediate,
   if (filters.showDesiredTraitOnly && desiredTrait) {
     filtered = filtered.filter(recipe => {
       return recipe.sources.some(source => source.trait === desiredTrait)
+    })
+  }
+
+  // Filter to show only recipes with at least one persona having the desired skill
+  if (filters.showDesiredSkillOnly && desiredSkill) {
+    filtered = filtered.filter(recipe => {
+      return recipe.sources.some(source => source.skills && desiredSkill in source.skills)
     })
   }
 
