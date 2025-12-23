@@ -50,6 +50,9 @@ function Fusions() {
   const [showMixedOnly, setShowMixedOnly] = useState(
     () => localStorage.getItem('p5r-fusion-showMixedOnly') === 'true'
   )
+  const [showDesiredTraitOnly, setShowDesiredTraitOnly] = useState(
+    () => localStorage.getItem('p5r-fusion-showDesiredTraitOnly') === 'true'
+  )
 
   // Sync filters to localStorage
   useEffect(() => {
@@ -67,6 +70,10 @@ function Fusions() {
   useEffect(() => {
     localStorage.setItem('p5r-fusion-showMixedOnly', showMixedOnly.toString())
   }, [showMixedOnly])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-showDesiredTraitOnly', showDesiredTraitOnly.toString())
+  }, [showDesiredTraitOnly])
 
   const handleSelectFusion = (name) => {
     if (name) {
@@ -95,11 +102,12 @@ function Fusions() {
   const gottenRecipes = useMemo(() => {
     return applyFusionFilters(
       rawRecipes,
-      { hideRare, hideDLC, hideNonOwned, showMixedOnly },
+      { hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly },
       personas,
-      fusableImmediate
+      fusableImmediate,
+      desiredTrait
     )
-  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, personas, fusableImmediate])
+  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly, personas, fusableImmediate, desiredTrait])
 
   return (
     <div className='fusion-calculator'>
@@ -152,6 +160,16 @@ function Fusions() {
           />
           <span className='toggle-slider'></span>
           <span className='toggle-text'>Show Mixed Owned/Fusable</span>
+        </label>
+        <label className='toggle-label'>
+          <input
+            type='checkbox'
+            checked={showDesiredTraitOnly}
+            onChange={(e) => setShowDesiredTraitOnly(e.target.checked)}
+            className='toggle-checkbox'
+          />
+          <span className='toggle-slider'></span>
+          <span className='toggle-text'>Show Only Recipes With Desired Trait</span>
         </label>
       </div>
 
