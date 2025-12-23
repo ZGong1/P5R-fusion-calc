@@ -7,7 +7,8 @@ import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
 import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil'
 import SmallPersona from './SmallPersona'
 import './Fusions.css'
-import traits from "../data/traits.js";
+import traits from "../data/traits.js"
+import skills from "../data/skills.js"
 
 const personaNames = customPersonaList.map((persona) => persona.name);
 
@@ -18,7 +19,14 @@ function Fusions() {
   const selectedFusion = searchParams.get('selected') || ''
 
   // selected desired trait state
-  const [desiredTrait, setDesiredTrait] = useState(null)
+  const [desiredTrait, setDesiredTrait] = useState(
+    () => localStorage.getItem('p5r-desired-trait') || null
+  )
+
+  // selected desired skill state
+  const [desiredSkill, setDesiredSkill] = useState(
+    () => localStorage.getItem('p5r-desired-skill') || null
+  )
 
   // Initialize selected persona from localStorage on mount if URL is empty
   useEffect(() => {
@@ -53,6 +61,9 @@ function Fusions() {
   const [showDesiredTraitOnly, setShowDesiredTraitOnly] = useState(
     () => localStorage.getItem('p5r-fusion-showDesiredTraitOnly') === 'true'
   )
+  const [showDesiredSkillOnly, setShowDesiredSkillOnly] = useState(
+    () => localStorage.getItem('p5r-fusion-showDesiredSkillOnly') === 'true'
+  )
 
   // Sync filters to localStorage
   useEffect(() => {
@@ -74,6 +85,28 @@ function Fusions() {
   useEffect(() => {
     localStorage.setItem('p5r-fusion-showDesiredTraitOnly', showDesiredTraitOnly.toString())
   }, [showDesiredTraitOnly])
+
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-showDesiredSkillOnly', showDesiredSkillOnly.toString())
+  }, [showDesiredSkillOnly])
+
+  // Sync desired trait to localStorage
+  useEffect(() => {
+    if (desiredTrait) {
+      localStorage.setItem('p5r-desired-trait', desiredTrait)
+    } else {
+      localStorage.removeItem('p5r-desired-trait')
+    }
+  }, [desiredTrait])
+
+  // Sync desired skill to localStorage
+  useEffect(() => {
+    if (desiredSkill) {
+      localStorage.setItem('p5r-desired-skill', desiredSkill)
+    } else {
+      localStorage.removeItem('p5r-desired-skill')
+    }
+  }, [desiredSkill])
 
   const handleSelectFusion = (name) => {
     if (name) {
@@ -102,12 +135,13 @@ function Fusions() {
   const gottenRecipes = useMemo(() => {
     return applyFusionFilters(
       rawRecipes,
-      { hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly },
+      { hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly, showDesiredSkillOnly },
       personas,
       fusableImmediate,
-      desiredTrait
+      desiredTrait,
+      desiredSkill
     )
-  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly, personas, fusableImmediate, desiredTrait])
+  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly, showDesiredSkillOnly, personas, fusableImmediate, desiredTrait, desiredSkill])
 
   return (
     <div className='fusion-calculator'>
@@ -116,7 +150,9 @@ function Fusions() {
         Please select which Persona you would like to fuse: {" "}
         <CompendiumSelector items={personaNames} selectedItem={selectedFusion} setSelectedItem={handleSelectFusion} ariaLabel="Select persona to fuse"/> <br/>
         Please select which trait you would like to target: {" "}
-        <CompendiumSelector items={traits} selectedItem={desiredTrait} setSelectedItem={e => setDesiredTrait(e)} ariaLabel="Select trait to target"/>
+        <CompendiumSelector items={traits} selectedItem={desiredTrait} setSelectedItem={e => setDesiredTrait(e)} ariaLabel="Select trait to target"/> <br/>
+        Please select which skill you would like to target: {" "}
+        <CompendiumSelector items={skills} selectedItem={desiredSkill} setSelectedItem={e => setDesiredSkill(e)} ariaLabel="Select skill to target"/>
       </div>
 
       {/* Filter toggles */}
@@ -171,6 +207,16 @@ function Fusions() {
           <span className='toggle-slider'></span>
           <span className='toggle-text'>Show Only Recipes With Desired Trait</span>
         </label>
+        <label className='toggle-label'>
+          <input
+            type='checkbox'
+            checked={showDesiredSkillOnly}
+            onChange={(e) => setShowDesiredSkillOnly(e.target.checked)}
+            className='toggle-checkbox'
+          />
+          <span className='toggle-slider'></span>
+          <span className='toggle-text'>Show Only Recipes With Desired Skill</span>
+        </label>
       </div>
 
       {/* Recipe count */}
@@ -211,7 +257,7 @@ function Fusions() {
           <h3>Legend:</h3>
           <p>Green means it's a persona you already own <br/>
           Yellow means it's a persona you can directly fuse <br/>
-          Blue border means it has the targeted trait <br/>
+          Blue border means it has the targeted trait or skill <br/>
           ⚠️ means it's either a treasure demon or DLC <small>(hover for details)</small></p>
         </>
       )}
@@ -228,6 +274,7 @@ function Fusions() {
                     personas={personas}
                     fusableImmediate={fusableImmediate}
                     desiredTrait={desiredTrait}
+                    desiredSkill={desiredSkill}
                     onClick={() => handleSelectFusion(persona.name)}
                   />
                   {personaIndex < recipe.sources.length - 1 && (
