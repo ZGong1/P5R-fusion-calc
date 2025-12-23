@@ -16,7 +16,7 @@ export function savePersonasToLocalStorage(personas) {
     localStorage.setItem('p5r-persona-inventory', JSON.stringify(personaList));
     localStorage.setItem('p5r-last-updated', new Date().toISOString());
   } catch (error) {
-    console.error('Error saving to localStorage:', error);
+    console.error('Error saving owned persona list to localStorage:', error);
   }
 }
 
@@ -94,6 +94,25 @@ export function loadFusableImmediateFromLocalStorage() {
     console.error('Error loading from localStorage:', error);
   }
   return null;
+}
+
+export function saveMetaDataToLocalStorage(metadata) {
+  try {
+    localStorage.setItem('p5r-save-metadata', JSON.stringify(metadata));
+  } catch (error) {
+    console.error('Error saving metadata to localstorage:', error)
+  }
+}
+
+export function loadMetaDataFromLocalStorage() {
+  try {
+    const stored = localStorage.getItem('p5r-save-metadata')
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (error) {
+    console.error('Error loading metadata to localstorage:', error);
+  }
 }
 
 /**
