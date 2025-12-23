@@ -7,13 +7,18 @@ import FusionCalculator from '../fusion-calculator-core/FusionCalculator'
 import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-core/DataUtil'
 import SmallPersona from './SmallPersona'
 import './Fusions.css'
+import traits from "../data/traits.js";
 
+const personaNames = customPersonaList.map((persona) => persona.name);
 
 function Fusions() {
   const { personas, fusableImmediate } = usePersonas()
   // Get selected fusion from URL parameters
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedFusion = searchParams.get('selected') || ''
+
+  // selected desired trait state
+  const [desiredTrait, setDesiredTrait] = useState(null)
 
   // Initialize selected persona from localStorage on mount if URL is empty
   useEffect(() => {
@@ -22,7 +27,7 @@ function Fusions() {
       if (lastSelected) {
         setSearchParams({ selected: lastSelected }, { replace: true })
       }
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []) // Only run on mount
 
   // Sync selected fusion to localStorage whenever it changes
@@ -45,6 +50,9 @@ function Fusions() {
   const [showMixedOnly, setShowMixedOnly] = useState(
     () => localStorage.getItem('p5r-fusion-showMixedOnly') === 'true'
   )
+  const [showDesiredTraitOnly, setShowDesiredTraitOnly] = useState(
+    () => localStorage.getItem('p5r-fusion-showDesiredTraitOnly') === 'true'
+  )
 
   // Sync filters to localStorage
   useEffect(() => {
@@ -63,6 +71,10 @@ function Fusions() {
     localStorage.setItem('p5r-fusion-showMixedOnly', showMixedOnly.toString())
   }, [showMixedOnly])
 
+  useEffect(() => {
+    localStorage.setItem('p5r-fusion-showDesiredTraitOnly', showDesiredTraitOnly.toString())
+  }, [showDesiredTraitOnly])
+
   const handleSelectFusion = (name) => {
     if (name) {
       setSearchParams({ selected: name })
@@ -74,15 +86,14 @@ function Fusions() {
   // initialize fusion calculator engine for fusion calculations
   const calculator = new FusionCalculator(customPersonaeByArcana)
 
-  // only persona name is passed; get full object with all persona data
-  // TODO: pass this into SmallPersona because it is useful there as well
-  const targetWithInfo = selectedFusion 
-    ? customPersonaList.find( persona => persona.name === selectedFusion ) 
+  // only persona name is held in the URI so find object with all data
+  const targetWithInfo = selectedFusion
+    ? customPersonaList.find( persona => persona.name === selectedFusion )
     : null
 
-  // TODO: pass into SmallPersona because it is useful here as well
   const isFound = personas?.find( persona => persona.name === selectedFusion )
 
+  // Obtain list of recipes, and filter down if options are set
   const rawRecipes = selectedFusion
     ? calculator.getRecipes(targetWithInfo)
     : null
@@ -91,18 +102,21 @@ function Fusions() {
   const gottenRecipes = useMemo(() => {
     return applyFusionFilters(
       rawRecipes,
-      { hideRare, hideDLC, hideNonOwned, showMixedOnly },
+      { hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly },
       personas,
-      fusableImmediate
+      fusableImmediate,
+      desiredTrait
     )
-  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, personas, fusableImmediate])
+  }, [rawRecipes, hideRare, hideDLC, hideNonOwned, showMixedOnly, showDesiredTraitOnly, personas, fusableImmediate, desiredTrait])
 
   return (
     <div className='fusion-calculator'>
-      {/* Persona selector */}
+      {/* Persona selector and related combobox selectors */}
       <div className='fusion-header'>
-        <p>Please select which Persona you would like to fuse:</p>
-        <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={handleSelectFusion}/>
+        Please select which Persona you would like to fuse: {" "}
+        <CompendiumSelector items={personaNames} selectedItem={selectedFusion} setSelectedItem={handleSelectFusion} ariaLabel="Select persona to fuse"/> <br/>
+        Please select which trait you would like to target: {" "}
+        <CompendiumSelector items={traits} selectedItem={desiredTrait} setSelectedItem={e => setDesiredTrait(e)} ariaLabel="Select trait to target"/>
       </div>
 
       {/* Filter toggles */}
@@ -147,6 +161,16 @@ function Fusions() {
           <span className='toggle-slider'></span>
           <span className='toggle-text'>Show Mixed Owned/Fusable</span>
         </label>
+        <label className='toggle-label'>
+          <input
+            type='checkbox'
+            checked={showDesiredTraitOnly}
+            onChange={(e) => setShowDesiredTraitOnly(e.target.checked)}
+            className='toggle-checkbox'
+          />
+          <span className='toggle-slider'></span>
+          <span className='toggle-text'>Show Only Recipes With Desired Trait</span>
+        </label>
       </div>
 
       {/* Recipe count */}
@@ -187,6 +211,7 @@ function Fusions() {
           <h3>Legend:</h3>
           <p>Green means it's a persona you already own <br/>
           Yellow means it's a persona you can directly fuse <br/>
+          Blue border means it has the targeted trait <br/>
           ⚠️ means it's either a treasure demon or DLC <small>(hover for details)</small></p>
         </>
       )}
@@ -199,9 +224,10 @@ function Fusions() {
               {recipe.sources.map((persona, personaIndex) => (
                 <span key={persona.name} style={{ display: 'contents' }}>
                   <SmallPersona
-                    name={persona.name}
+                    persona={persona}
                     personas={personas}
                     fusableImmediate={fusableImmediate}
+                    desiredTrait={desiredTrait}
                     onClick={() => handleSelectFusion(persona.name)}
                   />
                   {personaIndex < recipe.sources.length - 1 && (
