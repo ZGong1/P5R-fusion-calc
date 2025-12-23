@@ -8,12 +8,16 @@ import { customPersonaList, customPersonaeByArcana } from '../fusion-calculator-
 import SmallPersona from './SmallPersona'
 import './Fusions.css'
 
+const personaNames = customPersonaList.map((persona) => persona.name);
 
 function Fusions() {
   const { personas, fusableImmediate } = usePersonas()
   // Get selected fusion from URL parameters
   const [searchParams, setSearchParams] = useSearchParams()
   const selectedFusion = searchParams.get('selected') || ''
+
+  // selected desired trait state
+  const [desiredTrait, setDesiredTrait] = useState(null)
 
   // Initialize selected persona from localStorage on mount if URL is empty
   useEffect(() => {
@@ -99,8 +103,10 @@ function Fusions() {
     <div className='fusion-calculator'>
       {/* Persona selector */}
       <div className='fusion-header'>
-        <p>Please select which Persona you would like to fuse:</p>
-        <CompendiumSelector selectedPersona={selectedFusion} setSelectedPersona={handleSelectFusion}/>
+        Please select which Persona you would like to fuse: {" "}
+        <CompendiumSelector items={personaNames} selectedItem={selectedFusion} setSelectedItem={handleSelectFusion} ariaLabel="Select persona to fuse"/>
+        Please select which trait you would like to target: {" "}
+        {/* TODO: Get trait list and wire up CompendiumSelector for trait selection */}
       </div>
 
       {/* Filter toggles */}

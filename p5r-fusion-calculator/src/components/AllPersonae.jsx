@@ -2,7 +2,10 @@ import { useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import CompendiumSelector from './CompendiumSelector';
 import FullPersonaCard from './FullPersonaCard';
+import { customPersonaList } from '../fusion-calculator-core/DataUtil';
 import './AllPersonae.css';
+
+const personaNames = customPersonaList.map((persona) => persona.name);
 
 
 function AllPersonae () {
@@ -38,7 +41,7 @@ function AllPersonae () {
         <div className='all-personas'>
             <div className='persona-selector'>
                 <h1>Compendium of all Personas</h1>
-                Please select a Persona: <CompendiumSelector selectedPersona={selectedPersona} setSelectedPersona={handleSelectPersona} />
+                Please select a Persona: <CompendiumSelector items={personaNames} selectedItem={selectedPersona} setSelectedItem={handleSelectPersona} ariaLabel="Select persona" />
             </div>
 
             {/* {console.log("selectedPersona: ", selectedPersona)} */}
