@@ -5,7 +5,7 @@ import HexViewer from './HexViewer';
 import './FileUpload.css';
 
 function FileUpload() {
-    const { handleDecryptSuccess } = usePersonas();
+    const { handleDecryptSuccess, saveMetaData } = usePersonas();
     const [decryptedData, setDecryptedData] = useState(null);
     const [logs, setLogs] = useState([]);
     const [error, setError] = useState(null);
@@ -70,6 +70,9 @@ function FileUpload() {
                         {isProcessing ? 'Processing...' : 'Choose File'}
                     </label>
                 </div>
+
+                <h1>Save metadata:</h1>
+                <p>{JSON.stringify(saveMetaData)}</p>
 
                 {error && (
                     <div className="error-message">
