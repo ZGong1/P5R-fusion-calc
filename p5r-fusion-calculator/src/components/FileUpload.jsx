@@ -5,11 +5,12 @@ import HexViewer from './HexViewer';
 import './FileUpload.css';
 
 function FileUpload() {
-    const { handleDecryptSuccess } = usePersonas();
+    const { handleDecryptSuccess, saveMetaData, personas } = usePersonas();
     const [decryptedData, setDecryptedData] = useState(null);
     const [logs, setLogs] = useState([]);
     const [error, setError] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [showVerbose, setShowVerbose] = useState(false);
 
     const handleFileUpload = async (event) => {
         const file = event.target.files[0];
@@ -71,6 +72,66 @@ function FileUpload() {
                     </label>
                 </div>
 
+                {decryptedData && (
+                    <div className="verbose-toggle">
+                        <label className="toggle-switch">
+                            <input
+                                type="checkbox"
+                                checked={showVerbose}
+                                onChange={(e) => setShowVerbose(e.target.checked)}
+                            />
+                            <span className="toggle-slider"></span>
+                            <span className="toggle-label">Show verbose output</span>
+                        </label>
+                    </div>
+                )}
+
+                {saveMetaData && saveMetaData.inGameName && (
+                    <div className="save-metadata-card">
+                        <h3>Save File Information</h3>
+                        <div className="metadata-grid">
+                            <div className="metadata-item">
+                                <span className="metadata-label">Character Name</span>
+                                <span className="metadata-value">{saveMetaData.inGameName}</span>
+                            </div>
+                            <div className="metadata-item">
+                                <span className="metadata-label">Level</span>
+                                <span className="metadata-value">{saveMetaData.playerLevel}</span>
+                            </div>
+                            <div className="metadata-item">
+                                <span className="metadata-label">Date & Time</span>
+                                <span className="metadata-value">{saveMetaData.inGameDay}</span>
+                            </div>
+                            <div className="metadata-item">
+                                <span className="metadata-label">Location</span>
+                                <span className="metadata-value">{saveMetaData.inGameLocation}</span>
+                            </div>
+                            <div className="metadata-item">
+                                <span className="metadata-label">Play Time</span>
+                                <span className="metadata-value">{saveMetaData.playTime}</span>
+                            </div>
+                            <div className="metadata-item">
+                                <span className="metadata-label">Difficulty</span>
+                                <span className="metadata-value difficulty-{saveMetaData.difficulty?.toLowerCase()}">{saveMetaData.difficulty}</span>
+                            </div>
+                        </div>
+                        <div className="progress-section">
+                            <div className="progress-item">
+                                <div className="progress-header">
+                                    <span className="progress-label">Compendium Completion</span>
+                                    <span className="progress-percentage">{personas.length}/232 ({Math.round((personas.length / 232) * 100)}%)</span>
+                                </div>
+                                <div className="progress-bar">
+                                    <div
+                                        className="progress-fill"
+                                        style={{ width: `${(personas.length / 232) * 100}%` }}
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {error && (
                     <div className="error-message">
                         <strong>Error:</strong> {error}
@@ -84,7 +145,7 @@ function FileUpload() {
                 )}
             </div>
 
-            {decryptedData && <HexViewer data={decryptedData} logs={logs} />}
+            {decryptedData && <HexViewer data={decryptedData} logs={logs} showVerbose={showVerbose} />}
         </div>
     );
 }

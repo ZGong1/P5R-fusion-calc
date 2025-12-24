@@ -66,3 +66,30 @@ export function getUniquePersonas(personas) {
 
   return Array.from(uniqueMap.values());
 }
+
+/**
+ * Gets unique personas from extraction results (removes duplicates)
+ * @param {Object} buffer - A buffer of the decrypted save file
+ * @returns {Object} Metadata about the save file in object form such as player level, play time, difficulty, in game time, in game location
+ */
+export function extractSaveMetadata(buffer) {
+  const newSlice = buffer.slice(0xd0, 0x130);
+
+  const decoder = new TextDecoder('utf-8');
+
+  const metaDataStr = decoder.decode(newSlice);
+
+  const metaDataArr = metaDataStr.split('\n')
+
+  const toReturn = {
+    inGameDay: metaDataArr[0].split(",")[0],
+    inGameLocation: metaDataArr[0].split(",")[1],
+    playerLevel: metaDataArr[1].split(' ')[0].split(':')[1],
+    inGameName: metaDataArr[1].split(' ')[1],
+    playTime: metaDataArr[2].split(':')[1],
+    difficulty: metaDataArr[3].split(':')[1]
+  }
+
+  console.log("toReturn: ", toReturn);
+  return toReturn
+}
