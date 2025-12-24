@@ -58,6 +58,34 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Save Indicator */
+.save-indicator {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 160px;
+}
+
+.save-indicator-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #667eea;
+  font-weight: 700;
+}
+
+.save-indicator-value {
+  font-size: 0.85rem;
+  color: #333;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 @media (max-width: 768px) {
   .navbar-container {
     flex-direction: column;
@@ -67,5 +95,9 @@
 
   .navbar-tabs {
     justify-content: center;
+  }
+
+  .save-indicator {
+    margin: 0 auto;
   }
 }
